@@ -111,7 +111,40 @@ function deleteCookie() {
     window.location.reload()
 }</script></head>
 <body>
-    <div id="vlnacr37v8fd1x4tl35evp"><script src="https://kit.fontawesome.com/f048ac3c36.js" crossorigin="anonymous"></script>
+    <script  >setTimeout(function () {
+    if (getCookie("token") != "") {
+        if (testToken(getCookie("token"))) {
+            //appelle le server et recupere les informations de l'utilisateur
+            fetch('/api/getUserInfo?token=' + getCookie("token"))
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status) {
+                        console.log(data);
+                        //affiche les informations de l'utilisateur
+                        document.getElementById("userName").value = data.message.login;
+                        document.getElementById("userEmail").value = data.message.email;
+                    } else {
+                        //si le token est invalide on redirige vers /login
+                        window.location.replace("/");
+                    }
+                });
+        }
+    }
+}, 500);</script>
+<style  >/*userPanel--popup est une dib au centre de la page 80% H et 80% W avec un background blanc et un border radius de 10px*/
+#userPanel{
+    height: 100vh;
+    width: 100vw;
+}
+#userPanel--popup{
+    background-color: var(--white1);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 400px;
+    margin: auto auto;
+}</style>
+<div id="uk18qn4hjtszdo9tpasb5m"><script src="https://kit.fontawesome.com/f048ac3c36.js" crossorigin="anonymous"></script>
 <style  >/*
     --transition-duration: 0.5s;
     --green1: #b2e71e;
@@ -358,7 +391,7 @@ setTimeout( () => {
             <a href="/coopprojet" class="header--menu_link header--_coopprojet"><i class="fa-solid fa-rocket"></i> <span>Coop'Projet</span></a>
             <a href="/contact" class="header--menu_link header--_contact"><i class="fa-solid fa-envelope"></i> <span>Contact</span></a>
             <div id="userButton" class="header--menu_link header--_user"><i class="fa-solid fa-user"></i> <span>ce connecter</span><div id="UserData" style="display: none;" class="UserData">
-                <div id="7adspqhpnin3dqraqg5x6y"><style  ></style>
+                <div id="lmklibcye5myfebcvry9j"><style  ></style>
 <script  >setTimeout(async function(){
     console.log("userPanel");
     //test si l'utilisateur est connecté (un cookie existe)
@@ -397,7 +430,7 @@ setTimeout( () => {
 },500);
 </script>
 <div id="loginRegister">
-    <div id="9ybzpt1wohm62mss3hvwj"><script  >window.onload = function() {
+    <div id="ot8f7ulfpp2wjtp5zyog8"><script  >window.onload = function() {
     const username = document.getElementById("username");
     const password = document.getElementById("password");    
     const loginBt = document.getElementById("loginBt");
@@ -508,7 +541,7 @@ setTimeout( () => {
                     
     </div>
     <div class="header--themeSwitch">
-        <div id="w1e13k2c5sf45ah7baocyo"><div class="header--themeSwitch">
+        <div id="96nv69j0mj7erovcygiko4"><div class="header--themeSwitch">
     <button id="dark-mode" >🌙 dark mode</button>
 </div>
 <style>
@@ -577,164 +610,13 @@ setTimeout( () => {
 </div>
 </div>
 </div>
-<style  >
-.contact-form {
-    background-color: var(--white1);
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 400px;
-    margin: auto auto;
-}
-
-.contact-form h2 {
-    color: var(--black1);
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    color: var(--black1);
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="email"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--grey2);
-    border-radius: 3px;
-}
-
-button {
-    background-color: var(--blue1);
-    color: var(--white1);
-    border: none;
-    border-radius: 3px;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color var(--transition-duration);
-}
-
-button:hover {
-    background-color: var(--green2);
-}
-
-button:active {
-    background-color: var(--green3);
-}</style>
-<script  >const serverUrl =""// "/api/redirect?url=http://82.67.25.177";
-
-function displayCaptcha() {    
-    fetch(serverUrl+'/api/creatCaptcha')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        document.getElementById('captcha-image').src = data.img;
-        document.querySelector('input[name="captchaId"]').value = data.token;
-    });
-}
-//change le captcha toutes les 10 minutes
-setInterval(displayCaptcha, 600000);
-
-window.onload = function() {
-    document.getElementById('captcha-image').onclick = displayCaptcha;
-    displayCaptcha();
-    let submit = document.getElementById('submit');
-submit.onclick = function (e) {
-    e.preventDefault();
-    let name = document.querySelector('input[name="name"]').value;
-    let email = document.querySelector('input[name="email"]').value;
-    let message = document.querySelector('textarea[name="message"]').value;
-    let captcha = document.querySelector('input[name="captcha"]').value;
-    let captchaId = document.querySelector('input[name="captchaId"]').value;
-    fetch(serverUrl+'/api/newMessage?name=' + name + '&email=' + email + '&message=' + message + '&captcha=' + captcha + '&captchaId=' + captchaId)
-    .then(response => response.json())
-    .then(data => {
-        //si il y a une erreur, créer une popup avec le message d'erreur
-        let error = data.error;
-        let code = data.code;
-        //reinisialise le captcha si le code d'erreu est 234
-        if (code === 2 || code === 3 || code === 4) {
-            displayCaptcha();
-        }
-        if (error) {
-            let popup = document.createElement('div');
-            popup.classList.add('popup');
-            popup.style = `
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background-color: black;
-                border-radius: 10px;
-                border: solid red;
-                border-width: 0 0 0 10px;
-                padding: 10px;
-                color: white;
-            `
-            popup.innerHTML = error;
-            document.body.appendChild(popup);
-            setTimeout(() => {
-                popup.remove();
-            }, 5000);
-            return;
-        }else{
-            //si il n'y a pas d'erreur, créer une popup avec le message de succès
-            let popup = document.createElement('div');
-            popup.classList.add('popup');
-            popup.style = `
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background-color: black;
-                border-radius: 10px;
-                border: solid green;
-                border-width: 0 0 0 10px;
-                padding: 10px;
-                color: white;
-            `
-            popup.innerHTML = 'Message envoyé avec succès.';
-            document.body.appendChild(popup);
-            setTimeout(() => {
-                popup.remove();
-            }, 5000);
-        }
-    })
-}
-}</script>
-<div class="contact-form">
-    <h2>Contactez-nous</h2>
-    <form>
-        <div class="form-group">
-            <label for="name">Nom :</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="email">E-mail :</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="message">Message :</label>
-            <textarea id="message" name="message" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="captcha">Veuillez entrer le texte de l'image CAPTCHA ci-dessous :</label>
-            <img src="captcha-image.jpg" alt="CAPTCHA Image" id="captcha-image"><br>
-            <input type="text" id="captcha" name="captcha" required>
-        </div>
-        <input type="hidden" name="captchaId" value="id">          
-        <button id="submit">Envoyer</button>
-    </form>
+<div id="userPanel">
+    <div id="userPanel--popup">
+        <label for="userName">Nom d'utilisateur:</label><input type="text" id="userName" name="userName" value="">
+        <label for="userEmail">Email:</label><input type="text" id="userEmail" name="userEmail" value="">
+    </div>
 </div>
-<div id="07n5py5kl3s72k5qdgg1b15"><div id="footer--" class="footer--">
+<div id="gcx4ibjh5hmscfhnabtsff"><div id="footer--" class="footer--">
     <div class="footer--maint">
         <div class="footer--logo">
             <img id="footer--logo" src="media/img/logo--dark.svg" alt="logo">
@@ -879,5 +761,6 @@ submit.onclick = function (e) {
 
 </div>
 </div>
+
 </body>
 </html>

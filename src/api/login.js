@@ -1,7 +1,20 @@
 const { createHmac } = require('node:crypto');
 const fs = require('fs');
 module.exports.execute = function ({ res, arg, config  }) {
+    if (arg.length != 1) {
+        res.writeHead(400, {'Content-Type': 'text/json'});
+        res.write(JSON.stringify({status: 'error', message: 'missing argument'}));
+        res.end();
+        return;
+    }
     let { login, password, email } = arg[0]
+    //vérification des arguments
+    if (!login || !password || !email) {
+        res.writeHead(400, {'Content-Type': 'text/json'});
+        res.write(JSON.stringify({status: 'error', message: 'missing argument'}));
+        res.end();
+        return;
+    }
     //chiffrement du mot de passe en sha256
     password = createHmac('sha256', password).digest('hex');
     //création de l'utilisateur   

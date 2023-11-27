@@ -87,54 +87,8 @@ function setCookie(name, value, daysToExpire = 30, path = "/") {
     expires.setTime(expires.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
     const cookieValue = encodeURIComponent(value) + ((daysToExpire === null) ? '' : '; expires=' + expires.toUTCString()) + ((path === null) ? '' : '; path=' + path);
     document.cookie = name + '=' + cookieValue;
-}</script></head>
-<body>
-    <!DOCTYPE html>
-<html>
+}
 
-<head>
-</head>
-
-<body>
-    <h1>salut, cette page est une pade de devloppement des different composant du site</h1>
-    <p>-----------------------------test nouveau systeme de login-----------------------------</p>
-    <div id="vvz5yapc32nv3mfkw0v9s"><style  ></style>
-<script  >setTimeout(async function(){
-    console.log("userPanel");
-    //test si l'utilisateur est connecté (un cookie existe)
-    let token = getCookie("token");
-    console.log(token+" token");
-    if (await testToken(token)) {
-        console.log("user connected");
-        //si l'utilisateur est connecté, on affiche le panel utilisateur
-        document.getElementById("userPanelLink").style.display = "block";
-        document.getElementById("login").style.display = "none";
-    }else{
-        console.log("user not connected");
-        //sinon on affiche le formulaire de connexion
-        document.getElementById("userPanelLink").style.display = "none";
-        document.getElementById("login").style.display = "block";
-        //regarde si le block data est mis à jour, si oui on affiche le userPanelLink
-        //test toute les 500ms
-        let interval = setInterval(async function(){
-            if (document.getElementById("userPanelLink").style.display == "none"){
-                let token = getCookie("token");
-                console.log(token+" token");
-                if (token != ""){
-                    console.log( await testToken(token));
-                    if (await testToken(token)) {
-                        console.log("user connected");
-                        //si l'utilisateur est connecté, on affiche le panel utilisateur
-                        document.getElementById("userPanelLink").style.display = "block";
-                        document.getElementById("login").style.display = "none";
-                        console.log("clearInterval: "+interval);    
-                        clearInterval(interval);
-                    }
-                }
-            }
-        },500);
-    }
-},500);
 async function testToken(token){
     const response = await fetch('/api/testToken?token='+token);
     const data = await response.json();
@@ -155,9 +109,57 @@ function deleteCookie() {
         document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
     })
     window.location.reload()
-}</script>
+}</script></head>
+<body>
+    <!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <h1>salut, cette page est une pade de devloppement des different composant du site</h1>
+    <p>-----------------------------test nouveau systeme de login-----------------------------</p>
+    <div id="j8wpzsumqkgzfndgp1lwqp"><style  ></style>
+<script  >setTimeout(async function(){
+    console.log("userPanel");
+    //test si l'utilisateur est connecté (un cookie existe)
+    let token = getCookie("token");
+    console.log(token+" token");
+    if (await testToken(token)) {
+        console.log("user connected");
+        //si l'utilisateur est connecté, on affiche le panel utilisateur
+        document.getElementById("userPanelLink").style.display = "block";
+        document.getElementById("mainLogin").style.display = "none";
+    }else{
+        console.log("user not connected");
+        //sinon on affiche le formulaire de connexion
+        document.getElementById("userPanelLink").style.display = "none";
+        document.getElementById("login").style.display = "block";
+        //regarde si le block data est mis à jour, si oui on affiche le userPanelLink
+        //test toute les 500ms
+        let interval = setInterval(async function(){
+            if (document.getElementById("userPanelLink").style.display == "none"){
+                let token = getCookie("token");
+                console.log(token+" token");
+                if (token != ""){
+                    console.log( await testToken(token));
+                    if (await testToken(token)) {
+                        console.log("user connected");
+                        //si l'utilisateur est connecté, on affiche le panel utilisateur
+                        document.getElementById("userPanelLink").style.display = "block";
+                        document.getElementById("mainLogin").style.display = "none";
+                        console.log("clearInterval: "+interval);    
+                        clearInterval(interval);
+                    }
+                }
+            }
+        },500);
+    }
+},500);
+</script>
 <div id="loginRegister">
-    <div id="qdfzzh8mvprtsvwaadb5c"><script  >window.onload = function() {
+    <div id="agcxlzqguonhlwv0s5q47"><script  >window.onload = function() {
     const username = document.getElementById("username");
     const password = document.getElementById("password");    
     const loginBt = document.getElementById("loginBt");
@@ -250,7 +252,12 @@ function deleteCookie() {
 </div></div>
 </div>
 <div id="userPanelLink">
-    <h1>iqsdfusqeàofh</h1>
+    <a href="userPanel">User Panel</a>
+    <a href="produitAll">produits</a>
+    <a href="panier">panier</a>
+    <a href="historique">historique</a>
+    <a href="menu">menu</a>
+    <a href="logout" style="color: red;" >logout</a>
 </div></div>
     <p>-----------------------------test affichage du camion en 3D-----------------------------</p>
     

@@ -34,24 +34,3 @@ setTimeout(async function(){
         },500);
     }
 },500);
-async function testToken(token){
-    const response = await fetch('/api/testToken?token='+token);
-    const data = await response.json();
-    console.log(data);
-    return data.status;
-}
-/*
-           ^
-          / \
-         / I \
-        /  I  \
-       /   *   \
-      /_________\
- code de developpement
-*/
-function deleteCookie() {
-    document.cookie.split(";").forEach(function(c) {
-        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-    })
-    window.location.reload()
-}

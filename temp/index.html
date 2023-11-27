@@ -87,9 +87,31 @@ function setCookie(name, value, daysToExpire = 30, path = "/") {
     expires.setTime(expires.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
     const cookieValue = encodeURIComponent(value) + ((daysToExpire === null) ? '' : '; expires=' + expires.toUTCString()) + ((path === null) ? '' : '; path=' + path);
     document.cookie = name + '=' + cookieValue;
+}
+
+async function testToken(token){
+    const response = await fetch('/api/testToken?token='+token);
+    const data = await response.json();
+    console.log(data);
+    return data.status;
+}
+/*
+           ^
+          / \
+         / I \
+        /  I  \
+       /   *   \
+      /_________\
+ code de developpement
+*/
+function deleteCookie() {
+    document.cookie.split(";").forEach(function(c) {
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    })
+    window.location.reload()
 }</script></head>
 <body>
-    <div id="fdiiwixpiepl6fu6lro2k"><script src="https://kit.fontawesome.com/f048ac3c36.js" crossorigin="anonymous"></script>
+    <div id="4emk40s0i766mgkl5jzlp"><script src="https://kit.fontawesome.com/f048ac3c36.js" crossorigin="anonymous"></script>
 <style  >/*
     --transition-duration: 0.5s;
     --green1: #b2e71e;
@@ -336,7 +358,7 @@ setTimeout( () => {
             <a href="/coopprojet" class="header--menu_link header--_coopprojet"><i class="fa-solid fa-rocket"></i> <span>Coop'Projet</span></a>
             <a href="/contact" class="header--menu_link header--_contact"><i class="fa-solid fa-envelope"></i> <span>Contact</span></a>
             <div id="userButton" class="header--menu_link header--_user"><i class="fa-solid fa-user"></i> <span>ce connecter</span><div id="UserData" style="display: none;" class="UserData">
-                <div id="kx3ppdh0ruwz5xpin9co"><style  ></style>
+                <div id="3g8597jwlr8c86kbilljcs"><style  ></style>
 <script  >setTimeout(async function(){
     console.log("userPanel");
     //test si l'utilisateur est connecté (un cookie existe)
@@ -346,7 +368,7 @@ setTimeout( () => {
         console.log("user connected");
         //si l'utilisateur est connecté, on affiche le panel utilisateur
         document.getElementById("userPanelLink").style.display = "block";
-        document.getElementById("login").style.display = "none";
+        document.getElementById("mainLogin").style.display = "none";
     }else{
         console.log("user not connected");
         //sinon on affiche le formulaire de connexion
@@ -364,7 +386,7 @@ setTimeout( () => {
                         console.log("user connected");
                         //si l'utilisateur est connecté, on affiche le panel utilisateur
                         document.getElementById("userPanelLink").style.display = "block";
-                        document.getElementById("login").style.display = "none";
+                        document.getElementById("mainLogin").style.display = "none";
                         console.log("clearInterval: "+interval);    
                         clearInterval(interval);
                     }
@@ -373,29 +395,9 @@ setTimeout( () => {
         },500);
     }
 },500);
-async function testToken(token){
-    const response = await fetch('/api/testToken?token='+token);
-    const data = await response.json();
-    console.log(data);
-    return data.status;
-}
-/*
-           ^
-          / \
-         / I \
-        /  I  \
-       /   *   \
-      /_________\
- code de developpement
-*/
-function deleteCookie() {
-    document.cookie.split(";").forEach(function(c) {
-        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-    })
-    window.location.reload()
-}</script>
+</script>
 <div id="loginRegister">
-    <div id="av30egwplx9ir61cevo1l9"><script  >window.onload = function() {
+    <div id="h8prmi35g397yjs9kfncm4"><script  >window.onload = function() {
     const username = document.getElementById("username");
     const password = document.getElementById("password");    
     const loginBt = document.getElementById("loginBt");
@@ -488,7 +490,12 @@ function deleteCookie() {
 </div></div>
 </div>
 <div id="userPanelLink">
-    <h1>iqsdfusqeàofh</h1>
+    <a href="userPanel">User Panel</a>
+    <a href="produitAll">produits</a>
+    <a href="panier">panier</a>
+    <a href="historique">historique</a>
+    <a href="menu">menu</a>
+    <a href="logout" style="color: red;" >logout</a>
 </div></div>
             </div>
             <div id="closeMenu">
@@ -501,7 +508,7 @@ function deleteCookie() {
                     
     </div>
     <div class="header--themeSwitch">
-        <div id="0ve1ksyuf2aegz9g7r7cn8"><div class="header--themeSwitch">
+        <div id="0mg72nb1e9n6f0arqz3p9o"><div class="header--themeSwitch">
     <button id="dark-mode" >🌙 dark mode</button>
 </div>
 <style>
@@ -580,7 +587,7 @@ function deleteCookie() {
             </div>
     </div>
     </div>
-        <div id="cnybkyerorcrp4nkdc5jx"><style  >#promo--bg{
+        <div id="rl9cv7y63hh81okefuknnl"><style  >#promo--bg{
     background-image: url("media/img/wood.png");
     background-size: cover;
     background-repeat: no-repeat;
@@ -664,7 +671,7 @@ function deleteCookie() {
     </div>
 </div>
 </div>
-        <div id="k28x554lkpl0p79ii8fsc"><div id="financements">
+        <div id="aiy9o27a43j26xx37ps6jx"><div id="financements">
     
     <img src="https://s2.qwant.com/thumbr/474x105/e/8/00e26e26ad0f3d3b0a15d3451a4c280ce3084903c37e1a435e54d451b92f9d/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIP.R098h1003rdNbVLWdMzV9AHaBp%26pid%3DApi&q=0&b=1&p=0&a=0" alt="la banque des territoires">
     <img src="https://s1.qwant.com/thumbr/0x0/9/d/9fa0eac374a33c706b975d5265aaac27ec0457b4c8c280ff5c982aeb2a510d/fondation-dentreprise-carrefour.jpg?u=https%3A%2F%2Fwww.carrefouruncombatpourlaliberte.fr%2Fwp-content%2Fuploads%2F2014%2F10%2Ffondation-dentreprise-carrefour.jpg&q=0&b=1&p=0&a=0" alt="fondation carrefour">
@@ -689,7 +696,7 @@ function deleteCookie() {
 </style></div>
 
 </div>
-<div id="mp8cbegpcubloz8wyi8usg"><div id="footer--" class="footer--">
+<div id="o4xjbtvsunesylm2x7zpy9"><div id="footer--" class="footer--">
     <div class="footer--maint">
         <div class="footer--logo">
             <img id="footer--logo" src="media/img/logo--dark.svg" alt="logo">
