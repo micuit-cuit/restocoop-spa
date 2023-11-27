@@ -1,0 +1,84 @@
+<div>
+    <div style="height: var(--nav-height);">
+    <component src="header"></component>
+
+    <component src="products" variable="[]" />
+    </div>
+    <div style="display: none;">
+        <h1 id="producteursTitle" >nos producteurs laitiers</h1>
+        <div id="produicteurList" >
+            <div id="produicteur-1" class="produicteur">
+                <img src="media/img/vegetables.jpg" alt="vegetables" id="produicteur-1--img" class="produicteur--img">
+                <div id="produicteur-1--text" class="produicteur--text">
+                    <h2>Producteur de musique électronique:</h2>
+                    <p>Un magicien sonore dans son studio, créant des rythmes envoûtants et des mélodies captivantes pour vous faire danser
+                    toute la nuit. Il jongle avec des synthétiseurs, des boîtes à rythmes et des échantillons pour façonner l'avenir de la
+                    musique électronique.
+                    </p>
+                </div>
+            </div>
+            <div id="produicteur-2" class="produicteur">
+                <img src="media/img/vegetables.jpg" alt="vegetables" id="produicteur-2--img" class="produicteur--img">
+                <div id="produicteur-2--text" class="produicteur--text">
+                    <h2>Producteur de films primé:</h2>
+                    <p>Un conteur visuel passionné, il dirige avec habileté chaque aspect de la création cinématographique. De la scénarisation
+                    à la mise en scène, en passant par le montage, il orchestre un ballet d'images pour nous transporter dans des mondes
+                    imaginaires.</p>
+                </div>
+            </div>
+            <div id="produicteur-3" class="produicteur">
+                <img src="media/img/vegetables.jpg" alt="vegetables" id="produicteur-3--img" class="produicteur--img">
+                <div id="produicteur-3--text" class="produicteur--text">
+                    <h2>Producteur agricole bio:</h2>
+                    <p>Un gardien de la terre, il cultive des légumes, des fruits et des herbes aromatiques avec soin, en utilisant des
+                    méthodes respectueuses de l'environnement. Ses produits biologiques sont la quintessence de la fraîcheur et de la
+                    durabilité, nourrissant nos corps tout en préservant la planète.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <component src="promo/2"></component>
+    <component src="footer"></component>
+</div>
+<style>
+    #producteursTitle{
+        text-align: center;
+        margin: 20px;
+        color: var(--green3);
+    }
+    #produicteurList{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        align-items: stretch;
+    }
+    .produicteur--img{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+    .produicteur{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 100%;
+        padding: 50px;
+        margin: 20px;
+        border: var(--black1) solid 1px;
+        border-radius: 10px;
+        color: var(--black1);
+        text-align: center;
+    }
+    .produicteur--text{
+        margin: 20px;
+    }/*
+    @media screen and (max-width: 1050px) {
+        .produicteur--img{
+            height: 100%;
+            width: auto;
+        }
+    }*/
+</style>

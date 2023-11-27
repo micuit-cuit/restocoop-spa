@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --transition-duration: 0.25s;
+    --green1: #b2e71e;
+    --green2: #4ccd37;
+    --green3: #1d800d;
+    --blue1: #0dd8cc;
+    --red1: #f50101;
+    --white1: #ffffff;
+    --black1: #000000;
+    --grey1: #e5e9e4;
+    --grey2: #494b43;
+    --mode: white;
+    --nav-height: 100vh;
+    --nav-width: 100vw;
+    --nav-height-header: calc( var(--nav-height) - 14 * var(--nav-height) / 100 );
+    --nav-header: calc( 14 * var(--nav-height) / 100 );
+}
+
+#page-Import {
+    flex: 1;
+    /* Permet au contenu de prendre autant d'espace vertical que possible */
+    padding: 20px;
+}
+
+/* Cibler la barre de défilement */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Cibler la piste de la barre de défilement */
+::-webkit-scrollbar-track {
+    background-color: black;
+}
+
+/* Cibler le curseur de défilement */
+::-webkit-scrollbar-thumb {
+    background-color: var(--green2);
+    border-radius: 10px;
+}
+
+/* Cibler les boutons de flèche */
+::-webkit-scrollbar-button {
+    display: none;
+    /* Pour masquer les boutons */
+}
+
+/* Cibler le coin entre les pistes */
+::-webkit-scrollbar-corner {
+    background-color: var(--grey1);
+}
+
+body {
+    background: var(--grey1);
+    transition: background var(--transition-duration);
+    overflow-x: hidden;
+    color: var(--grey2);
+
+}

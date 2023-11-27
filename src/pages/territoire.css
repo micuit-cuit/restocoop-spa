@@ -1,0 +1,13 @@
+#mouse {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1050px) {
+    #image-index {
+        height: var(--nav-height);
+        width: auto;
+    }
+}
+

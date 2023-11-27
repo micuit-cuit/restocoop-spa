@@ -1,0 +1,76 @@
+#promo--bg{
+    background-image: url("media/img/wood.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: calc(var(--nav-height) / 2);
+    display: flex;
+}
+#promo--text{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 50%;
+    margin: 20px;
+
+}
+#promo--img{
+    background-image: url("media/img/cat.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: calc( 100% - 40px );
+    width: 50%;
+    margin: 20px 20px;
+    border-radius: 10px;
+}
+#promo--inscription{
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+#promo--inscription:hover{
+    background-color: rgba(255, 255, 255, 0.5);
+    color: var(--green1);
+    transition: var(--transition-duration);
+}
+#promo--cuisinez{
+    color: var(--green1);
+    font-size: 2rem;
+    text-align: center;
+    background-color: #00000060;
+    padding: 20px 0;
+    border-radius: 10px;
+}
+#promo--choisissez{
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 20px 0;
+    border-radius: 10px;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+@media screen and (max-width: 1300px) {
+    #promo--bg{
+        flex-direction: column;
+        height: var(--nav-height)
+    }
+    #promo--text{
+        width: 100%;
+        margin: 10px;
+    }
+    #promo--img{
+        width: 100%;
+        margin: 10px;
+        height: 50vh;
+    }
+
+    
+}

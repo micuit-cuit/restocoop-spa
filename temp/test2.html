@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <style>* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --transition-duration: 0.25s;
+    --green1: #b2e71e;
+    --green2: #4ccd37;
+    --green3: #1d800d;
+    --blue1: #0dd8cc;
+    --red1: #f50101;
+    --white1: #ffffff;
+    --black1: #000000;
+    --grey1: #e5e9e4;
+    --grey2: #494b43;
+    --mode: white;
+    --nav-height: 100vh;
+    --nav-width: 100vw;
+    --nav-height-header: calc( var(--nav-height) - 14 * var(--nav-height) / 100 );
+    --nav-header: calc( 14 * var(--nav-height) / 100 );
+}
+
+#page-Import {
+    flex: 1;
+    /* Permet au contenu de prendre autant d'espace vertical que possible */
+    padding: 20px;
+}
+
+/* Cibler la barre de défilement */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Cibler la piste de la barre de défilement */
+::-webkit-scrollbar-track {
+    background-color: black;
+}
+
+/* Cibler le curseur de défilement */
+::-webkit-scrollbar-thumb {
+    background-color: var(--green2);
+    border-radius: 10px;
+}
+
+/* Cibler les boutons de flèche */
+::-webkit-scrollbar-button {
+    display: none;
+    /* Pour masquer les boutons */
+}
+
+/* Cibler le coin entre les pistes */
+::-webkit-scrollbar-corner {
+    background-color: var(--grey1);
+}
+
+body {
+    background: var(--grey1);
+    transition: background var(--transition-duration);
+    overflow-x: hidden;
+    color: var(--grey2);
+
+}</style> <script>function getCookie(cookieName) {
+    const name = cookieName + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i];
+        while (cookie.charAt(0) === ' ') {
+        cookie = cookie.substring(1);
+        }
+        if (cookie.indexOf(name) === 0) {
+        return cookie.substring(name.length, cookie.length);
+        }
+    }
+    return "";
+}
+function setCookie(name, value, daysToExpire = 30, path = "/") {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+    const cookieValue = encodeURIComponent(value) + ((daysToExpire === null) ? '' : '; expires=' + expires.toUTCString()) + ((path === null) ? '' : '; path=' + path);
+    document.cookie = name + '=' + cookieValue;
+}</script></head>
+<body>
+    <!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <h1>salut, cette page est une pade de devloppement des different composant du site</h1>
+    <p>-----------------------------test nouveau systeme de login-----------------------------</p>
+    <div id="knioq4aduhibxv4dl14a1r"><style  ></style>
+<script  >setTimeout(async function(){
+    console.log("userPanel");
+    //test si l'utilisateur est connecté (un cookie existe)
+    let token = getCookie("token");
+    console.log(token+" token");
+    if (await testToken(token)) {
+        console.log("user connected");
+        //si l'utilisateur est connecté, on affiche le panel utilisateur
+        document.getElementById("userPanelLink").style.display = "block";
+        document.getElementById("login").style.display = "none";
+    }else{
+        console.log("user not connected");
+        //sinon on affiche le formulaire de connexion
+        document.getElementById("userPanelLink").style.display = "none";
+        document.getElementById("login").style.display = "block";
+        //regarde si le block data est mis à jour, si oui on affiche le userPanelLink
+        //test toute les 500ms
+        let interval = setInterval(async function(){
+            if (document.getElementById("userPanelLink").style.display == "none"){
+                let token = getCookie("token");
+                console.log(token+" token");
+                if (token != ""){
+                    console.log( await testToken(token));
+                    if (await testToken(token)) {
+                        console.log("user connected");
+                        //si l'utilisateur est connecté, on affiche le panel utilisateur
+                        document.getElementById("userPanelLink").style.display = "block";
+                        document.getElementById("login").style.display = "none";
+                        console.log("clearInterval: "+interval);    
+                        clearInterval(interval);
+                    }
+                }
+            }
+        },500);
+    }
+},500);
+async function testToken(token){
+    const response = await fetch('/api/testToken?token='+token);
+    const data = await response.json();
+    console.log(data);
+    return data.status;
+}
+/*
+           ^
+          / \
+         / I \
+        /  I  \
+       /   *   \
+      /_________\
+ code de developpement
+*/
+function deleteCookie() {
+    document.cookie.split(";").forEach(function(c) {
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    })
+    window.location.reload()
+}</script>
+<div id="loginRegister">
+    <div id="rm55easlpbxm73dy2z0tq"><script  >window.onload = function() {
+    const username = document.getElementById("username");
+    const password = document.getElementById("password");    
+    const loginBt = document.getElementById("loginBt");
+    const remember = document.getElementById("remember");
+    const registerBtShow = document.getElementById("registerBtShow");
+    const loginBtShow = document.getElementById("loginBtShow");
+
+    const registerUsername = document.getElementById("register-username");
+    const registerPassword = document.getElementById("register-password");
+    const registerEmail = document.getElementById("register-email");
+    const registerBt = document.getElementById("registerBt");
+
+    console.log(loginBt, registerBt);
+    loginBt.onclick = function() {
+        console.log(username.value, password.value);
+        fetch('/api/login?login='+username.value+'&password='+password.value)
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            if (data.token){
+                let tokenStorage = document.getElementById("tokenStorage")
+                tokenStorage.innerText=data.token
+                setCookie("token",data.token,remember.checked?1:30)
+            }
+        });
+    }
+    registerBt.onclick = function() {
+        console.log(registerUsername.value, registerPassword.value, registerEmail.value);
+        fetch('/api/register?login='+registerUsername.value+'&password='+registerPassword.value+'&email='+registerEmail.value)
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message);
+            if (data.token){
+                let tokenStorage = document.getElementById("tokenStorage")
+                tokenStorage.innerText=data.token
+                setCookie("token",data.token,1)
+            }
+        });
+    }
+    registerBtShow.onclick = function() {
+        document.getElementById("login").style.transform = "translateX(-15vw)";
+        document.getElementById("register").style.transform = "translateX(0)"
+    }
+    loginBtShow.onclick = function() {
+        document.getElementById("login").style.transform = "translateX(0vw)";
+        document.getElementById("register").style.transform = "translateX(15vw)";
+    }
+}</script>
+<style  >#mainLogin{
+    height: 42vh;
+    width: 15vw;
+    background-color: #00e2ff;
+    color: black;
+    display: flex;
+    padding: 10px;
+    overflow: hidden;
+    position: relative;;
+}
+#login,#register{
+    position: absolute;
+    height: 42vh;
+    width: 15vw;
+    margin: 0 10px;
+    transition: transform 0.5s ease-in-out;
+
+}
+
+#register{
+    transform: translateX(15vw);
+}
+</style>
+<div id="mainLogin">
+    <div id="login">
+        <label>login</label>
+        <label for="username">nom d'utilisateur: </label><input type="text" name="username" id="username">
+        <label for="mdp">mot de pass: </label><input type="password" name="password" id="password">
+        <input type="checkbox" name="remember" id="remember"><label for="remember">se souvenir de moi pendant 30 jours</label>
+        <button id="loginBt" >login</button>
+        <button id="registerBtShow" >register</button>
+    </div>
+    <div id="register">
+        <label>register</label>
+        <label for="username">nom d'utilisateur: </label><input type="text" name="username" id="register-username">
+        <label for="email">email: </label><input type="email" name="email" id="register-email">
+        <label for="mdp">mot de pass: </label><input type="password" name="password" id="register-password">
+        <button id="registerBt" >register</button>
+        <button id="loginBtShow" >login</button>
+    </div>
+    <data id="tokenStorage" style="display: none;"></data>
+</div></div>
+</div>
+<div id="userPanelLink">
+    <h1>iqsdfusqeàofh</h1>
+</div></div>
+    <p>-----------------------------test affichage du camion en 3D-----------------------------</p>
+    
+
+
+</body>
+
+</html>
+</body>
+</html>

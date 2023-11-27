@@ -1,0 +1,18 @@
+# Blender 3.6.2 MTL File: 'None'
+# www.blender.org
+
+newmtl ForkLift_Truck
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+Ps 0.000000
+Pc 0.000000
+Pcr 0.030000
+aniso 0.000000
+anisor 0.000000
+map_Kd ForkLift_Truck_BaseColor.1001.png
+map_Pm ForkLift_Truck_Metallic.1001.png
+map_Pr ForkLift_Truck_Roughness.1001.png
+map_Bump -bm 1.000000 ForkLift_Truck_Normal.1001.png

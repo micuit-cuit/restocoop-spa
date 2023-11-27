@@ -1,0 +1,22 @@
+#mainLogin{
+    height: 42vh;
+    width: 15vw;
+    background-color: #00e2ff;
+    color: black;
+    display: flex;
+    padding: 10px;
+    overflow: hidden;
+    position: relative;;
+}
+#login,#register{
+    position: absolute;
+    height: 42vh;
+    width: 15vw;
+    margin: 0 10px;
+    transition: transform 0.5s ease-in-out;
+
+}
+
+#register{
+    transform: translateX(15vw);
+}

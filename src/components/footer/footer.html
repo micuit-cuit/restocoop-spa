@@ -1,0 +1,144 @@
+<div id="footer--" class="footer--">
+    <div class="footer--maint">
+        <div class="footer--logo">
+            <img id="footer--logo" src="media/img/logo--dark.svg" alt="logo">
+            <div id="description" class="footer--description">La coopérative Alimentaire du Forez a vocation à fournir toutes les communes du territoire et approvisionner les
+            professionnels en aliments de qualité répondant aux critères de la loi Egalim.</div>
+            <a class="footer--logo__link" href="/mentions">Mentions légales</a>
+            <a class="footer--logo__link" href="/cgv">CGV</a>
+        </div>
+        <div class="footer--menu">
+            <h3>lien rapide</h3>
+            <div class="footer--menu--link">
+                <div class="footer--menu--link--maint">
+                    <a href="/" class="footer--menu--link--maint--link">Accueil</a>
+                    <a href="/territoire" class="footer--menu--link--maint--link">le Territoire</a>
+                    <a href="/produits" class="footer--menu--link--maint--link">le Produits</a>
+                    <a href="/inscription" class="footer--menu--link--maint--link">Inscription</a>
+                    <a href="/mentions" class="footer--menu--link--maint--link">Mentions légales</a>
+                    <a href="/cgv" class="footer--menu--link--maint--link">CGV</a>
+                    <a href="/beta" class="footer--menu--link--maint--link">Beta</a>
+                </div>
+                <div class="footer--menu--link--food">
+                    <a href="/produits/fruits" class="footer--menu--link--food--link">Fruits</a>
+                    <a href="/produits/legumes" class="footer--menu--link--food--link">Légumes</a>
+                    <a href="/produits/viandes" class="footer--menu--link--food--link">Viandes</a>
+                    <a href="/produits/epicerie" class="footer--menu--link--food--link">Epicerie</a>
+                    <a href="/produits/produits-laitiers" class="footer--menu--link--food--link">Produits laitiers</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer--contact">
+            <h3>contact</h3>
+            <div class="footer--contact--maint">
+                <a href="mailto:contact@restocoop.fr" class="footer--contact--maint--link"><i class="fa-solid fa-envelope"></i> contact@restocoop.fr</a>
+                <a href="tel:+33651654413" class="footer--contact--maint--link"><i class="fa-solid fa-phone"></i> 06-51-65-44-13</a>
+                <a href="https://www.qwant.com/maps/place/addr:4.212585;45.625660:45@45_Route_du_Canal#map=18.45/45.6257290/4.2126359" class="footer--contact--maint--link"><i class="fa-solid fa-map-marker"></i>45 route du canal, 42210 Boisset-lès-Montrond</a>
+            </div>
+        </div>
+    </div>
+<style>
+    .footer--maint{
+        background-image: url("media/img/wood.png");
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        align-content: flex-start;
+        justify-content: center;
+        text-align: center;
+        background-size: cover;
+    }
+    .footer--contact{
+        max-width: 33%;
+    }
+    .footer--menu--link{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+    .footer--menu--link--maint{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: flex-end;
+        align-items: center;
+        margin: 0 10px;
+    }
+    .footer--menu--link--food{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: flex-end;
+        align-items: center;
+        margin: 0 10px;
+    }
+    .footer--logo{
+        color: white;
+        max-width: 33%;
+    }
+    .footer-- h3 {
+        color: white;
+        text-align: center;
+    }
+    .footer-- a {
+        color: white;
+        text-decoration: none;
+    }
+    img#footer--logo {
+        width: 50%;
+        height: auto;
+    }
+    a.footer--menu--link--food--link {
+        margin: 3px;
+    }
+
+    a.footer--menu--link--maint--link {
+        margin: 4px;
+    }
+    .footer--menu {
+        margin: 10px 3%;
+    }
+    .footer--contact{
+        margin: 10px 3%;
+    }
+    .footer--contact--maint--link {
+        margin: 4px;
+    }
+    .footer--contact--maint {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+        align-content: center;
+    }
+    .footer--logo__link{
+        display: none;
+    }
+    @media (max-width: 768px){
+        .footer--contact{
+            display: none;
+        }
+        .footer--menu{
+            display: none;
+        }
+        .footer--logo{
+            max-width: 100%;
+            display: flex;
+            align-items: center;
+            margin: 20px;
+        }
+        .footer--logo__link{
+            display: block;
+        }
+    }
+    @media (max-width: 425px){
+        #footer--logo{
+            display: none;
+        }
+    }
+</style>
+
+</div>

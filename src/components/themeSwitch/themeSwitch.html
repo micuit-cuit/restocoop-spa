@@ -1,0 +1,63 @@
+<div class="header--themeSwitch">
+    <button id="dark-mode" >🌙 dark mode</button>
+</div>
+<style>
+    #dark-mode {
+        background-color: var(--black1);
+        color: var(--white1);
+        border: none;
+        border-radius: 10px;
+        padding: 5px;
+        font-family: ubuntu;
+        font-size: 1rem;
+        box-shadow: 0px 0px 100px 0px var(--black1);
+        transition: var(--transition-duration);
+    }
+</style>
+<script>
+    const BUTTON = document.querySelector("#dark-mode");
+    const LOGO = document.querySelector("#header--logo");
+    const body = document.querySelector("body");
+    let darkMode = localStorage.getItem("darkMode") || "dark";
+    let darkModeCss = `
+        :root{
+        --white1: #000000;
+        --black1: #ffffff;
+        --grey1: #494b43;
+        --grey2: #e5e9e4;
+        --mode: black;
+        --green3: #b2e71e;
+        }
+    `;
+    updateDarkMode()
+
+
+    const TOGGLE = () => {
+        darkMode = darkMode === "light" ? "dark" : "light";
+        localStorage.setItem("darkMode", darkMode);
+        updateDarkMode()
+
+    };
+    function updateDarkMode() {
+        if (darkMode === "light") {
+            LOGO.setAttribute("src", "media/img/logo--white.svg");
+            BUTTON.textContent = "🌙 dark mode";
+            body.setAttribute("data-dark-mode", false);
+            //recherche la balise style #dark-mode et la supprime
+            let darkModeStyle = document.querySelector("#dark-mode-style");
+            if (darkModeStyle) {
+                darkModeStyle.remove();
+            }
+        } else {
+            LOGO.setAttribute("src", "media/img/logo--dark.svg");
+            BUTTON.textContent = "☀️ light mode";
+            body.setAttribute("data-dark-mode", true);
+            //crée une balise style #dark-mode et lui ajoute le contenu de la variable darkModeCss
+            let darkModeStyle = document.createElement("style");
+            darkModeStyle.setAttribute("id", "dark-mode-style");
+            darkModeStyle.textContent = darkModeCss;
+            document.body.appendChild(darkModeStyle);
+        }
+    }
+    BUTTON.addEventListener("click", TOGGLE);
+</script>

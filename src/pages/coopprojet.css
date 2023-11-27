@@ -1,0 +1,14 @@
+img{
+    width: 100%;
+}
+.tab{
+    margin-left: 30px;
+}
+#coopprojet{
+    margin: 30px 30%;
+}
+@media screen and (max-width: 1050px) {
+    #coopprojet{
+        margin: 30px 10%;
+    }
+}
