@@ -8,4 +8,11 @@ module.exports.routes = {
     'GET /contact': 'contact.html',
     'GET /panier': 'panier.html',
     'GET /beta': 'test2.html',
+
+    
+    'GET /userPanel': 'test.html',
+    'GET /panier': 'test.html',
+    'GET /historique': 'test.html',
+    'GET /menu': 'test.html',
+    'GET /logout': 'test.html',
 }

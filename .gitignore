@@ -131,4 +131,5 @@ dist
 
 
 # temporary files and folders
-tmp
+tmp/
+captcha/

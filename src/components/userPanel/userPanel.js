@@ -7,7 +7,7 @@ setTimeout(async function(){
         console.log("user connected");
         //si l'utilisateur est connecté, on affiche le panel utilisateur
         document.getElementById("userPanelLink").style.display = "block";
-        document.getElementById("login").style.display = "none";
+        document.getElementById("mainLogin").style.display = "none";
     }else{
         console.log("user not connected");
         //sinon on affiche le formulaire de connexion
@@ -25,7 +25,7 @@ setTimeout(async function(){
                         console.log("user connected");
                         //si l'utilisateur est connecté, on affiche le panel utilisateur
                         document.getElementById("userPanelLink").style.display = "block";
-                        document.getElementById("login").style.display = "none";
+                        document.getElementById("mainLogin").style.display = "none";
                         console.log("clearInterval: "+interval);    
                         clearInterval(interval);
                     }
