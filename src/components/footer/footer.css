@@ -8,6 +8,7 @@
     justify-content: center;
     text-align: center;
     background-size: cover;
+    height: 30vh;
 }
 .footer--contact{
     max-width: 33%;
