@@ -1,5 +1,5 @@
 {
-    deblopeurMode:true,//true pour activer le mode debloper [boolean default:false]
+    devMode:true,//true pour activer le mode debloper [boolean default:false]
     port:3033,//port du serveur [int (0-65535) default:3000]
     componentIframe:false,//metre les composant dans des iframes, permet de separez chaque composant [boolean default:true] metre a true si vous avez des bug d'affichage
     devtool:{

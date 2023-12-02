@@ -1,7 +1,7 @@
 const { createHmac } = require('node:crypto');
 const fs = require('fs');
 const e = require('express');
-module.exports.execute = function ({ res, arg, config  }) {
+module.exports.execute = function ({ res, arg, config , userDb}) {
     let { login, password, email } = arg[0]
     //vérification des données
     console.log (login, password, email, arg);
@@ -38,19 +38,9 @@ module.exports.execute = function ({ res, arg, config  }) {
     }
     //chiffrement du mot de passe en sha256
     password = createHmac('sha256', password).digest('hex');
-    //création de l'utilisateur   
-    if (!fs.existsSync(config.path.custom.db)) {
-        fs.writeFileSync(config.path.custom.db, JSON.stringify([]));
-    }
-    let users = fs.readFileSync(config.path.custom.db, 'utf8');
-    users = JSON.parse(users);
-    //vérification si l'utilisateur existe déjà (login ou email)
-    let userExist = false;
-    users.forEach(user => {
-        if (user.login == login || user.email == email) {
-            userExist = true;
-        }
-    });
+    //création de l'utilisateur dans la base de données
+    
+    
     if (userExist) {
         res.writeHead(400, {'Content-Type': 'text/json'});
         res.write(JSON.stringify({status: 'error', message: 'user already exist'}));
