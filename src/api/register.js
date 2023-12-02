@@ -1,6 +1,6 @@
 const { createHmac } = require('node:crypto');
-const fs = require('fs');
-const e = require('express');
+const { Log } = require('../../log.js');
+const log = new Log();
 module.exports.execute = function ({ res, arg, config , userDb}) {
     let { login, password, email } = arg[0]
     //vérification des données
@@ -38,19 +38,23 @@ module.exports.execute = function ({ res, arg, config , userDb}) {
     }
     //chiffrement du mot de passe en sha256
     password = createHmac('sha256', password).digest('hex');
-    //création de l'utilisateur dans la base de données
-    
-    
-    if (userExist) {
-        res.writeHead(400, {'Content-Type': 'text/json'});
-        res.write(JSON.stringify({status: 'error', message: 'user already exist'}));
-        res.end();
-    }else{
-        let token = createHmac('sha256', login + email + password+Date.now()).digest('hex');
-        users.push({login: login, password: password, email: email, token: token});
-        fs.writeFileSync(config.path.custom.db, JSON.stringify(users));
-        res.writeHead(200, {'Content-Type': 'text/json'});
-        res.write(JSON.stringify({status: 'success', message: 'user created', token: token}));
-        res.end();
-    }
+    let token = createHmac('sha256', login + email + password+Date.now()).digest('hex');
+    //création de l'utilisateur dans la base de données (userdb table)
+
+    const client = userDb
+    //test si l'utilisateur existe déjà dans la base de données en sql
+    //création de l'utilisateur dans la base de données (userdb table)
+    client.query(`INSERT INTO userdb (username, password, email, token) VALUES ('${login}', '${password}', '${email}', '${token}')`)
+        .then((user) => {
+            if (user) {
+                res.writeHead(200, {'Content-Type': 'text/json'});
+                res.write(JSON.stringify({status: 'success', message: 'user created', token: token}));
+                res.end();
+            }
+        })
+        .catch((err) => {
+            res.writeHead(400, {'Content-Type': 'text/json'});
+            res.write(JSON.stringify({status: 'error', message: 'user already exists'}));
+            res.end();
+        })
 }

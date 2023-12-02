@@ -348,10 +348,10 @@ client.connect()
         log.l('connected to database');
         //ajoute les table dans la base de donnée pour les userdb
         client.query(`CREATE TABLE IF NOT EXISTS userdb (
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(255),
-            email VARCHAR(255),
-            password VARCHAR(255),
+            id SERIAL PRIMARY KEY NOT NULL,
+            userName VARCHAR(255) NOT NULL UNIQUE,
+            email VARCHAR(255) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL ,
             token VARCHAR(255)
         );`)
             .then(() => {

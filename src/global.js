@@ -35,6 +35,7 @@ async function testToken(token){
        /   *   \
       /_________\
  code de developpement
+ attention, deleteCookie() est utilisé dans userPanel.html, bien pencé à le recoder plutard
 */
 function deleteCookie() {
     document.cookie.split(";").forEach(function(c) {
