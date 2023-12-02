@@ -9,7 +9,7 @@ module.exports.execute = function ({ res, arg, config  }) {
     }
     let { login, password, email } = arg[0]
     //vérification des arguments
-    if (!login || !password || !email) {
+    if (!(login || email) || !password) {
         res.writeHead(400, {'Content-Type': 'text/json'});
         res.write(JSON.stringify({status: 'error', message: 'missing argument'}));
         res.end();
