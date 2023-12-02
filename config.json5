@@ -10,7 +10,7 @@
         component:"./src/components/",//chemin du dossier composant [string default:"./src/components"]
         page:"./src/pages/",//chemin du dossier page [string default:"./src/pages"]
         media:"./src/media/",//chemin du dossier media [string default:"./src/media"]
-        temp:"./temp/",//chemin du dossier temp [string default:"./temp"]
+        temp:"./build/",//chemin du dossier temp [string default:"./temp"]
         router:"./src/router.js",//chemin du fichier router [string default:"./src/router.js"]
         globalCss:"./src/global.css",//chemin du fichier css global [string default:"./src/global.css"]
         globalJs:"./src/global.js",//chemin du fichier js global [string default:"./src/global.js"]
@@ -27,7 +27,7 @@
     captchaCaractere:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,;:!*-+@/.?",//caractere possible pour le captcha [string default:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,;:!*-+@/.?"]
     captchaLongeur:[7,10],//longeur du captcha [array default:[5,7]]
     tempFile:[//fichier temporaire a suprimer au demarage du serveur [array default:["./temp"]]
-        "./temp",
+        "./build",
         "./src/media/img/captcha",//chemin du dossier captcha, pour suprimer les captcha non utiliser et eviter de surcharger le serveur (il sont suprimer au bout de 10min) [string default:"./src/media/img/captcha"]
     ],//ATTENTION: CHAQUE CHEMIN VA ETRE SUPRIMER AU DEMARAGE DU SERVEUR, NE METTER PAS DE CHEMIN IMPORTANT
 }

@@ -346,8 +346,8 @@ const client = new Client({
 client.connect()
     .then(() => {
         log.l('connected to database');
-        //ajoute les table dans la base de donnée pour les clients
-        client.query(`CREATE TABLE IF NOT EXISTS user (
+        //ajoute les table dans la base de donnée pour les userdb
+        client.query(`CREATE TABLE IF NOT EXISTS userdb (
             id SERIAL PRIMARY KEY,
             name VARCHAR(255),
             email VARCHAR(255),
@@ -355,11 +355,11 @@ client.connect()
             token VARCHAR(255)
         );`)
             .then(() => {
-                log.l('created table clients');
+                log.l('table userdb created or already exist');
                 start({ app, port: config.port, f: () => { log.l('server started'); } });
             })
             .catch(err => {
-                log.error('error creating table clients');
+                log.error('error creating table userdb');
                 log.error(err);
             });
     })

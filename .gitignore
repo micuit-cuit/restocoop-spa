@@ -131,6 +131,7 @@ dist
 
 
 # temporary files and folders
-tmp/
 captcha/
 temp/activeCaptcha.json
+temp/
+build/
