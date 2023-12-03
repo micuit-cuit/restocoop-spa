@@ -1,0 +1,36 @@
+#userPanel
+{
+    overflow: hidden;
+    height: 100%;
+    width: 20vh;
+}
+#userPanelLink{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+}
+#userPanelLink a{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    border-radius: 0px;
+    transition: var(--transition-duration);
+}
+#userPanelLink a:hover{
+    background-color: var(--green1);
+    color: var(--white1);
+    border-radius: 15px;
+    height: 150%;
+}

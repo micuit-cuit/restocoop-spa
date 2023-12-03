@@ -44,6 +44,7 @@
     height: 40vh;
     margin: 0 0 0 -8vw;
     background: #0000008a;
+    box-shadow: 0px 0px 100px 0px var(--black1);
     border-radius: 10px;
     padding: 10px;
 
