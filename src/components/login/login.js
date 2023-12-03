@@ -38,11 +38,13 @@ window.onload = function() {
             }
         });
     }
-    registerBtShow.onclick = function() {
+    registerBtShow.onclick = function(e) {
+        e.preventDefault();
         document.getElementById("login").style.transform = "translateX(-15vw)";
         document.getElementById("register").style.transform = "translateX(0)"
     }
-    loginBtShow.onclick = function() {
+    loginBtShow.onclick = function(e) {
+        e.preventDefault();
         document.getElementById("login").style.transform = "translateX(0vw)";
         document.getElementById("register").style.transform = "translateX(15vw)";
     }
