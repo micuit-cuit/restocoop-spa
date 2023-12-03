@@ -2,7 +2,7 @@
 {
     overflow: hidden;
     height: 100%;
-    width: 20vh;
+    width: 30vh;
 }
 #userPanelLink{
     display: flex;
@@ -17,7 +17,7 @@
 #userPanelLink a{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-wrap: nowrap;
     align-content: flex-start;
     align-items: center;
@@ -25,12 +25,17 @@
     width: 100%;
     text-decoration: none;
     color: white;
-    border-radius: 0px;
     transition: var(--transition-duration);
 }
+#userPanelLink a svg{
+    margin: 0 10px;
+    transition: var(--transition-duration);
+    transform: rotate(0deg);
+}
 #userPanelLink a:hover{
-    background-color: var(--green1);
-    color: var(--white1);
-    border-radius: 15px;
-    height: 150%;
+    color: var(--green1);
+    font-weight: bold;
+}
+#userPanelLink a:hover svg{
+    transform: rotate(360deg);
 }
