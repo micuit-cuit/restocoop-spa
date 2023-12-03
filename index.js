@@ -1,13 +1,16 @@
 require('json5/lib/register');
+require('dotenv').config();
 const json5 = require('json5');
 const express = require('express');
-require('dotenv').config();
 const http = require('http');
 const fs = require('fs');
-const config = require('./config.json5');
-const root = require('./src/router.js').routes;
+const {start,Log} = require('./log.js');
+const { Client } = require('pg');
 const browserDectect = require('browser-detect')
 const HTMLParser = require('node-html-parser');
+const config = require('./config.json5');
+const root = require('./src/router.js').routes;
+const log = new Log();
 function parseRoute(route) {
     let routes = [];
     for (let key in route) {
@@ -65,7 +68,12 @@ app.get('*', (req, res, next) => {
     let date = new Date();
     let dateNow = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
     //affiche en vert les adresse ip de l'utilisateur , le user agent en bleu et la date en jaune
-    console.log(`\x1b[1;33m [${dateNow}] \x1b[1;31m${ip} \x1b[1;34m${browser.name} \x1b[1;35m${browser.version} \x1b[1;36m${browser.os}  \x1b[1;31m${req.url}\x1b[0m`);
+    let reqUrl = req.url;
+    //si l'url contient un ? alors on suprime tout ce qui est apret le ?
+    if (reqUrl.includes('?') && !config.devMode){
+        reqUrl = reqUrl.split('?')[0];
+    }
+    console.log(`\x1b[1;33m [${dateNow}] \x1b[1;31m${ip} \x1b[1;34m${browser.name} \x1b[1;35m${browser.version} \x1b[1;36m${browser.os}  \x1b[1;31m${reqUrl}\x1b[0m`);
     next();
 
 });
@@ -259,15 +267,15 @@ app.get('/api/:api*', async (req, res) => {
         }
         arg.push(arg1.split("/")[i])
     }
-    console.log("\x1b[34m%s\x1b[0m", "api: " + req.params.api);
-    console.log("\x1b[32m%s\x1b[0m", "arg: " + JSON.stringify(arg));
-    //appel l'api (api/$api)
-    //test si l'api existe dans le dossier api
-    console.log(config.path.api + req.params.api + ".js")
+    if (config.devMode){
+        log.l('api: ' + req.params.api);
+        log.l('arg: ' + JSON.stringify(arg));
+        log.l('chemin de l\'api: ' + config.path.api + req.params.api + ".js");
+    }
     if (fs.existsSync(config.path.api + req.params.api + ".js")) {
         //si oui, appel l'api
         const api = require(config.path.api + req.params.api + ".js");
-        api.execute({apiKeys: process.env.COMMERCE_JS_API, config: config, res: res, arg: arg, req: req});
+        api.execute({apiKeys: process.env.COMMERCE_JS_API, config: config, res: res, arg: arg, req: req, userDb: client});
     } else {
         res.send("api not found");
     }
@@ -279,8 +287,10 @@ app.get('/*', (req, res) => {
         res.send('');
         return;
     }
-    if (config.deblopeurMode) {
+    if (config.devMode) {
+        const time = new Date();
         build(config);
+        log.l('temps de build: ' + (new Date() - time) + 'ms');
     }
     let page = null;
     for (let i = 0; i < routeParsed.length; i++) {
@@ -326,30 +336,34 @@ if (config.path.startJs) {
         require(config.path.startJs).execute({ config: config, server: server });
     }
 }
-function start() {
-    server.listen(config.port, () => {
-        //recuperre toute les adresse ip du serveur
-        const os = require('os');
-        let ifaces = os.networkInterfaces();
-        let ips = [];
-        Object.keys(ifaces).forEach(function (ifname) {
-            let alias = 0;
-            ifaces[ifname].forEach(function (iface) {
-
-                if ('IPv4' !== iface.family || iface.internal !== false) {
-                    return;
-                }
-                if (alias >= 1) {
-                    ips.push(iface.address);
-                } else {
-                    ips.push(iface.address);
-                }
-                ++alias;
+const client = new Client({
+    host: process.env.PG_HOST,
+    port: process.env.PG_PORT,
+    user: process.env.PG_USER,
+    password: process.env.PG_PASSWORD,
+    database: process.env.PG_DATABASE
+});
+client.connect()
+    .then(() => {
+        log.l('connected to database');
+        //ajoute les table dans la base de donnée pour les userdb
+        client.query(`CREATE TABLE IF NOT EXISTS userdb (
+            id SERIAL PRIMARY KEY NOT NULL,
+            userName VARCHAR(255) NOT NULL UNIQUE,
+            email VARCHAR(255) NOT NULL UNIQUE,
+            password VARCHAR(255) NOT NULL ,
+            token VARCHAR(255)
+        );`)
+            .then(() => {
+                log.l('table userdb created or already exist');
+                start({ app, port: config.port, f: () => { log.l('server started'); } });
+            })
+            .catch(err => {
+                log.error('error creating table userdb');
+                log.error(err);
             });
-        });
-        ips.push('localhost');
-        //affiche en vert les adresse ip du serveur + le port {fleche qui descend et tourne a droite en caractere speciaux: \u21B3}↳
-        console.log(`\x1b[1;31mServer lancé sur les adresses suivantes :\n${ips.map(ip => `    \x1b[1;36m↳\x1b[1;33mhttp://\x1b[1;32m${ip}\x1b[1;34m:${config.port}`).join('\n')} \x1b[1;33m\nPour l'arreter : Ctrl + C \x1b[0m\n`);
+    })
+    .catch(err => {
+        log.error('error connecting to database');
+        log.error(err);
     });
-}
-start();

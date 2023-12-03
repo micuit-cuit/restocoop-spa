@@ -1,0 +1,40 @@
+#producteursTitle{
+    text-align: center;
+    margin: 20px;
+    color: var(--green3);
+}
+#produicteurList{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    align-items: stretch;
+}
+.produicteur--img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.produicteur{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    padding: 50px;
+    margin: 20px;
+    border: var(--black1) solid 1px;
+    border-radius: 10px;
+    color: var(--black1);
+    text-align: center;
+}
+.produicteur--text{
+    margin: 20px;
+}/*
+@media screen and (max-width: 1050px) {
+    .produicteur--img{
+        height: 100%;
+        width: auto;
+    }
+}*/

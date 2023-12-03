@@ -20,3 +20,26 @@ function setCookie(name, value, daysToExpire = 30, path = "/") {
     const cookieValue = encodeURIComponent(value) + ((daysToExpire === null) ? '' : '; expires=' + expires.toUTCString()) + ((path === null) ? '' : '; path=' + path);
     document.cookie = name + '=' + cookieValue;
 }
+
+async function testToken(token){
+    const response = await fetch('/api/testToken?token='+token);
+    const data = await response.json();
+    console.log(data);
+    return data.status;
+}
+/*
+           ^
+          / \
+         / I \
+        /  I  \
+       /   *   \
+      /_________\
+ code de developpement
+ attention, deleteCookie() est utilisé dans userPanel.html, bien pencé à le recoder plutard
+*/
+function deleteCookie() {
+    document.cookie.split(";").forEach(function(c) {
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    })
+    window.location.reload()
+}

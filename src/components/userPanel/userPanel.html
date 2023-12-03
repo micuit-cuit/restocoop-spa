@@ -1,8 +1,17 @@
 <linkFile rel="stylesheet" href="userPanel.css"></linkFile>
 <linkFile rel="javascript" href="userPanel.js"></linkFile>
-<div id="loginRegister">
-    <component src="login"></component>
-</div>
-<div id="userPanelLink">
-    <h1>iqsdfusqeàofh</h1>
+<div id="userPanel">
+        
+    <div id="loginRegister">
+        <component src="login"></component>
+    </div>
+    <div id="userPanelLink">
+        <a href="userPanel"><i class="fa-solid fa-gear"></i>setting</a>
+        <a href="produitAll"><i class="fa-solid fa-carrot"></i>produits</a>
+        <a href="panier"><i class="fa-solid fa-box"></i>panier</a>
+        <a href="historique"><i class="fa-solid fa-clock-rotate-left"></i>historique</a>
+        <a href="menu"><i class="fa-solid fa-display"></i>repas</a>
+        <a onclick="deleteCookie()"
+        style="color: red;" ><i class="fa-solid fa-arrow-right-from-bracket"></i>logout</a>
+    </div>
 </div>
