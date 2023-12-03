@@ -15,7 +15,7 @@ module.exports.execute = function ({ res, arg, config , userDb}) {
         res.write(JSON.stringify({status: 'error', message: 'data too short'}));
         res.end();
         return;
-    } else if (login.length > 20 || password.length > 20 || email.length > 20) {
+    } else if (login.length > 20 || password.length > 20 || email.length > 255) {
         res.writeHead(400, {'Content-Type': 'text/json'});
         res.write(JSON.stringify({status: 'error', message: 'data too long'}));
         res.end();

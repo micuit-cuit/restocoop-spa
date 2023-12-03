@@ -9,17 +9,17 @@ module.exports.execute = function ({ res, arg, config , userDb}) {
             user = user.rows
             if (user.length > 0){ 
                 res.writeHead(200, {'Content-Type': 'text/json'});
-                res.write(JSON.stringify({status: 'success', message: 'user connected'}));
+                res.write(JSON.stringify({message: 'token valide', status: true}));
                 res.end();
             } else {
                 res.writeHead(200, {'Content-Type': 'text/json'});
-                res.write(JSON.stringify({status: 'error', message: 'user not connected'}));
+                res.write(JSON.stringify({message: 'token invalide', status: false}));
                 res.end();
             }
         })
         .catch((err) => {
             res.writeHead(400, {'Content-Type': 'text/json'});
-            res.write(JSON.stringify({status: 'error', message: 'user not connected'}));
+            res.write(JSON.stringify({message: 'token invalide', status: false}));
             res.end();
         })
 }
