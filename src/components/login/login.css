@@ -1,8 +1,7 @@
 #mainLogin{
     height: 42vh;
     width: 15vw;
-    background-color: #00e2ff;
-    color: black;
+    color: white;
     display: flex;
     padding: 10px;
     overflow: hidden;
@@ -14,9 +13,48 @@
     width: 15vw;
     margin: 0 10px;
     transition: transform 0.5s ease-in-out;
-
+    overflow: hidden;
 }
+
 
 #register{
     transform: translateX(15vw);
+}
+#rememberMe{
+    transition: var(--transition-duration);
+}
+#rememberMe:hover{
+    color: var(--green1);
+    font-weight: bold;
+}
+/* si remenber est activé */
+#remember:checked + #rememberMe {
+    color: var(--green3);
+}
+#loginBt, #registerBtShow, #registerBt, #loginBtShow{
+    /*resset css button*/
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    outline: inherit;
+    /*css button*/
+    color: white;
+    transition: var(--transition-duration);
+}
+#loginBt:hover, #registerBtShow:hover, #registerBt:hover, #loginBtShow:hover{
+    font-weight: bold;
+}
+#loginBt, #registerBt{
+    padding: 10px;
+    background-color: var(--green1);
+    border-radius: 10px;
+    color: black;
+}
+
+#registerBtShow:hover , #loginBtShow:hover{
+    color: blue;
+}
+#username , #password , #egister-username , #register-password , #register-email{
+    width: 85%;
 }

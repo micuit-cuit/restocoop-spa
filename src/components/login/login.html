@@ -2,20 +2,43 @@
 <linkFile rel="stylesheet" href="login.css"/>
 <div id="mainLogin">
     <div id="login">
-        <label >login</label>
-        <label for="username">nom d'utilisateur: </label><input type="text" name="username" id="username">
-        <label for="mdp">mot de pass: </label><input type="password" name="password" id="password">
-        <input type="checkbox" name="remember" id="remember"><label for="remember">se souvenir de moi pendant 30 jours</label>
-        <button id="loginBt" >login</button>
-        <button id="registerBtShow" >register</button>
+        <h2>Login</h2>
+        <form>
+            <label for="username">nom d'utilisateur:</label>
+            <input type="text" name="username" id="username" aria-label="Enter your username" required>
+    
+            <label for="password">mot de passe:</label>
+            <input type="password" name="password" id="password" aria-label="Enter your password" required>
+            <br>
+
+            <input type="checkbox" name="remember" id="remember">
+            <label for="remember" id="rememberMe" >ce souvenir de moi</label>
+    
+            <br>
+    
+            <button type="submit" id="loginBt" aria-label="Login">se connecter</button>
+            <button type="button" id="registerBtShow" aria-label="Show Registration">
+                créer un compte
+            </button>
+        </form>
     </div>
+    
     <div id="register">
-        <label >register</label>
-        <label for="username">nom d'utilisateur: </label><input type="text" name="username" id="register-username">
-        <label for="email">email: </label><input type="email" name="email" id="register-email">
-        <label for="mdp">mot de pass: </label><input type="password" name="password" id="register-password">
-        <button id="registerBt">register</button>
-        <button id="loginBtShow">login</button>
+        <h2>Register</h2>
+        <form>
+            <label for="register-username">Username:</label>
+            <input type="text" name="username" id="register-username" aria-label="Choose a username" required>
+    
+            <label for="register-email">Email:</label>
+            <input type="email" name="email" id="register-email" aria-label="Enter your email" required>
+    
+            <label for="register-password">Password:</label>
+            <input type="password" name="password" id="register-password" aria-label="Choose a password" required>
+    
+            <button type="submit" id="registerBt" aria-label="Register">Register</button>
+            <button type="button" id="loginBtShow" aria-label="Show Login">Login</button>
+        </form>
     </div>
+    
     <data id="tokenStorage" style="display: none;"></data>
 </div>
