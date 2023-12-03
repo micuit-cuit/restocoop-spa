@@ -141,6 +141,16 @@ function pageResolution(page, config) {
     htmlFile.querySelectorAll('component').forEach(component => {
         //recupere le nom du component
         let name = component.getAttribute('src');
+        //recupere tout les variable du component et les stock dans un objet (variable="['Nos Produits Phares', 'Nos Produits Phares2']" => ['Nos Produits Phares', 'Nos Produits Phares2'])
+        let attribut = component.getAttribute('variable');
+        let variableAtribut = []
+        if (attribut != undefined) { 
+            try {
+                variableAtribut = json5.parse(attribut)
+            } catch (error) {
+                console.log("\x1b[1;31mErreur l'ors de la lecture des variables du component: " + name + "\n " + error + "\x1b[0m");
+            }
+        }
         //recupere le contenu du component
         let path = name
         //si name contient un / alors 
@@ -162,9 +172,9 @@ function pageResolution(page, config) {
         let iframeId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         let outHtml
         if (config.componentIframe) {
-            outHtml = `<iframe id="${iframeId}" srcdoc="$${componentContentFile.toString().replace(/"/g, "'").replace(/\n/g, '')}" style="width: 100%; border: none;"></iframe>`;
+            outHtml = `<iframe id="${iframeId}" srcdoc="${variableAtribut.length > 0 ? variableAtribut != undefined ? `<script>window.${name} = ${JSON.stringify(variableAtribut)};</script>` : '' : ''}${componentContentFile.toString().replace(/"/g, "'").replace(/\n/g, '')}" style="width: 100%; border: none;"></iframe>`;
         }else {
-            outHtml = `<div id="${iframeId}">${componentContentFile.toString()}</div>`;
+            outHtml = `<div id="${iframeId}">${variableAtribut.length > 0 ? variableAtribut != undefined ? `<script>window.${name} = ${JSON.stringify(variableAtribut)};</script>` : '' : ''}${componentContentFile.toString()}</div>`;
         }
         component.replaceWith(outHtml);
     });

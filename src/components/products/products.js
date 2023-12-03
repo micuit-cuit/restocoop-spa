@@ -1,6 +1,6 @@
 //script
 const serverUrl =""// "/api/redirect?url=http://82.67.25.177";
-console.log("productsPreview");
+console.log("productsPreview", window.products);
 
 function getCategories() {
     fetch(serverUrl+"/api/categories")
@@ -234,7 +234,14 @@ function addInCart(productId, quantity) {
 }
 
 window.onload = function () {
+    //si window.products est un objet html alors on le remplace par undefined
+    if (window.products instanceof HTMLElement) {
+        window.products = undefined;
+    }
     let fullScreen = document.getElementById("fullScreen");
+    if (window.products != undefined) {
+        fullScreen.style.display = "none";
+    }
     let fullScreenToggle = false;
     fullScreen.onclick = function () {
         //met en plainne ecrant #productsPreview 
@@ -269,6 +276,20 @@ window.onload = function () {
         }
         //ecrit une fonction qui faire une alerte avec la taille de l'ecrant
     }
-    getCategories();
-    getProducts();
+    if (window.products != undefined) {
+        fullScreen.style.display = "none";
+        console.log("recherche de produits:", window.products);
+        const categories = document.getElementById("categories");
+        //recupere la taille x de categories en js pure
+        const products = document.getElementById("products");
+        //ajoute la taille x de categories a products
+        products.style.width = (categories.getBoundingClientRect().width + products.getBoundingClientRect().width) + "px"; 
+        categories.style.display = "none";
+        getProducts(window.products);
+
+    }else{
+        console.log("recherche de catégories + produits");
+        getCategories();
+        getProducts();
+    }
 }

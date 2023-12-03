@@ -6,6 +6,10 @@ module.exports.execute = function ({ apiKeys, res, config }) {
     })
         .then(res => res.json())
         .then(json => {
+            if (config.devMode) {
+                res.send(json)
+                return
+            }
             //ecrit un console.log en vert avec le message de réussite
             //envoie la réponse au client
             //cache les catégories répertoriées dans le config.hiddenCategories
