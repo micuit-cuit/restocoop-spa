@@ -161,11 +161,10 @@ function getProducts(categoryId = null) {
                         console.log(popup);
                         document.getElementById("productsPreview").appendChild(popup);
                         let addToCartButton = document.getElementById("add-to-cart-"+i);
-                        addToCartButton.onclick = function () {
+                        addToCartButton.onclick = function (event) {
                             console.log("add to cart");
                             let quantity = popup.querySelector(".products--container--quantity input").value * 10;
-                            addInCart(products[i].id, quantity);
-                            popUp("Produit ajouter au panier");
+                            addInCart(products[i].id, quantity, event)
                             popup.remove();
                         }
                         popup.onclick = function (e) {
@@ -206,7 +205,7 @@ function getProducts(categoryId = null) {
     }
 
 }
-function addInCart(productId, quantity) {
+function addInCart(productId, quantity, event) {
 //get cart from cookie
     let cart = getCookie("panierid");
     if (!cart) {
@@ -217,8 +216,7 @@ function addInCart(productId, quantity) {
                 console.log(data);
                 let cart = data.id;
                 setCookie("panierid", cart);
-                addInCart(productId, quantity);
-                updateMenu()
+                addInCart(productId, quantity, event);
             }
         );
     } else {
@@ -226,8 +224,32 @@ function addInCart(productId, quantity) {
         fetch(serverUrl+"/api/addPanier/" + cart + "/" + productId + "/" + quantity)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
-                popUp("Produit ajouter au panier");
+                //crée une dive avec l'image du produit
+                let div = document.createElement("div")
+                div.innerHTML = `<img src="${data.image}" alt="${data.name}" class="panier--container--body--product--img">`
+                div.style= "width:50px;height:50px; position:absolute; border-radius:50%; overflow:hidden; transition:all 1s ease-in-out;"
+                //get mouse position
+                let x = event.clientX;
+                let y = event.clientY;
+                div.style.top = y + "px";
+                div.style.left = x + "px";
+                //optien la position de la div panier
+                let panier = document.getElementById("panier");
+                let panierX = panier.getBoundingClientRect().x;
+                let panierY = panier.getBoundingClientRect().y;
+                //ajoute la div a au productsPreview
+                document.getElementById("productsPreview").appendChild(div);
+                console.log(div)
+                //anime la div vers le panier
+                div.style.top = panierY + "px";
+                div.style.left = panierX + "px";
+                div.style.width = "0px";
+                div.style.height = "0px";
+                div.style.opacity = "0";
+                setTimeout(function () {
+                    div.remove();
+                },1000)
+
             }
         );
     }
@@ -239,8 +261,10 @@ window.onload = function () {
         window.products = undefined;
     }
     let fullScreen = document.getElementById("fullScreen");
+    let panier = document.getElementById("panier");
     if (window.products != undefined) {
         fullScreen.style.display = "none";
+        panier.style.display = "none";
     }
     let fullScreenToggle = false;
     fullScreen.onclick = function () {
@@ -278,6 +302,7 @@ window.onload = function () {
     }
     if (window.products != undefined) {
         fullScreen.style.display = "none";
+        panier.style.display = "none";
         console.log("recherche de produits:", window.products);
         const categories = document.getElementById("categories");
         //recupere la taille x de categories en js pure
