@@ -12,7 +12,8 @@ window.onload = function() {
     const registerBt = document.getElementById("registerBt");
 
     console.log(loginBt, registerBt);
-    loginBt.onclick = function() {
+    loginBt.onclick = function(e) {
+        e.preventDefault();
         console.log(username.value, password.value);
         fetch('/api/login?login='+username.value+'&password='+password.value)
         .then(response => response.json())
@@ -25,7 +26,8 @@ window.onload = function() {
             }
         });
     }
-    registerBt.onclick = function() {
+    registerBt.onclick = function(e) {
+        e.preventDefault();
         console.log(registerUsername.value, registerPassword.value, registerEmail.value);
         fetch('/api/register?login='+registerUsername.value+'&password='+registerPassword.value+'&email='+registerEmail.value)
         .then(response => response.json())
