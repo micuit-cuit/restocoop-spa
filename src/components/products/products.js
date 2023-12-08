@@ -276,6 +276,21 @@ window.onload = function () {
     if (window.products != undefined) {
         fullScreen.style.display = "none";
         panier.style.display = "none";
+    }else{
+        let iframe = document.createElement("iframe");
+        iframe.src = "/panier"
+        iframe.style.position = "absolute";
+        iframe.style.top = "0";
+        iframe.style.left = "0";
+        iframe.style.width = "20%";
+        iframe.style.height = "0%";
+        iframe.style.border = "none";
+        iframe.style.zIndex = "100";
+        iframe.style.transition = "all 1s";
+        iframe.id = "panierIframe";
+        document.body.appendChild(iframe);
+        console.log(iframe);
+
     }
     let fullScreenToggle = false;
     fullScreen.onclick = function () {
@@ -310,6 +325,26 @@ window.onload = function () {
             fullScreen.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M456 224H312c-13.3 0-24-10.7-24-24V56c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2l40 40L442.3 5.7C446 2 450.9 0 456 0s10 2 13.7 5.7l36.7 36.7C510 46 512 50.9 512 56s-2 10-5.7 13.7L433 143l40 40c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8zm0 64c9.7 0 18.5 5.8 22.2 14.8s1.7 19.3-5.2 26.2l-40 40 73.4 73.4c3.6 3.6 5.7 8.5 5.7 13.7s-2 10-5.7 13.7l-36.7 36.7C466 510 461.1 512 456 512s-10-2-13.7-5.7L369 433l-40 40c-6.9 6.9-17.2 8.9-26.2 5.2s-14.8-12.5-14.8-22.2V312c0-13.3 10.7-24 24-24H456zm-256 0c13.3 0 24 10.7 24 24V456c0 9.7-5.8 18.5-14.8 22.2s-19.3 1.7-26.2-5.2l-40-40L69.7 506.3C66 510 61.1 512 56 512s-10-2-13.7-5.7L5.7 469.7C2 466 0 461.1 0 456s2-10 5.7-13.7L79 369 39 329c-6.9-6.9-8.9-17.2-5.2-26.2s12.5-14.8 22.2-14.8H200zM56 224c-9.7 0-18.5-5.8-22.2-14.8s-1.7-19.3 5.2-26.2l40-40L5.7 69.7C2 66 0 61.1 0 56s2-10 5.7-13.7L42.3 5.7C46 2 50.9 0 56 0s10 2 13.7 5.7L143 79l40-40c6.9-6.9 17.2-8.9 26.2-5.2s14.8 12.5 14.8 22.2V200c0 13.3-10.7 24-24 24H56z"/></svg>`
         }
         //ecrit une fonction qui faire une alerte avec la taille de l'ecrant
+    }
+    let panierToggle = false;
+    panier.onclick = function () {
+        let panierIframe = document.getElementById("panierIframe");
+        console.log(panierIframe);
+        if (panierToggle) {
+            panierIframe.style.height = "0%";
+            setTimeout(function () {
+                panierIframe.style.display = "none";
+            }, 1000);
+            panierToggle = false;
+            return;
+        }else{
+            //affiche une iframe avec le panier dedans
+            panierIframe.style.display = "block";
+            panierToggle = true;
+            setTimeout(function () {
+                panierIframe.style.height = "50%";
+            }, 10);
+        }
     }
     if (window.products != undefined) {
         fullScreen.style.display = "none";
