@@ -77,7 +77,7 @@ function getProducts(categoryId = null) {
                                     <p>${products[i].price.formatted}€/${products[i].sku}</p>
                                     <div class="popup--container--body--details--quantity">
                                         <div class="products--container--quantity"> <input type="number" value="1" min="1" max="${products[i].inventory.available / 10}" id="quantity-${products[i].id}"> <label for="quantity-${products[i].id}">✗ 10 kg</label></div>
-                                        <button class="add-to-cart" id="add-to-cart-${i}"><i class="fa-solid fa-cart-plus"></i></button>
+                                        <button class="add-to-cart" id="add-to-cart-${i}" img="${products[i].image.url}"><i class="fa-solid fa-cart-plus"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -206,6 +206,41 @@ function getProducts(categoryId = null) {
 
 }
 function addInCart(productId, quantity, event) {
+    //crée une img qui va de la position de l'element cliquer a la position du panier
+    //et le panier mange l'image
+    let cartDiv = document.getElementById("panier");
+    let productsPreview = document.getElementById("productsPreview");
+    let productsPreviewPosition = productsPreview.getBoundingClientRect();
+    let cartPosition = cartDiv.getBoundingClientRect();
+    let img = document.createElement("img");
+    console.log(event.target);
+    img.src = event.target.getAttribute("img") || "https://s2.qwant.com/thumbr/474x355/d/b/15ac021101131d183d2e6f9a4cbcb9283c673e0af5e7df2913fe2dbad8c40b/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIP.rExqAS6nxccIjikCQQdfvQHaFj%26pid%3DApi&q=0&b=1&p=0&a=0"
+    img.style.position = "absolute";
+    img.style.top = (event.clientY - 50 - productsPreviewPosition.top) + "px"; 
+    img.style.left = (event.clientX - 50 - productsPreviewPosition.left) + "px";
+    img.style.width = "100px";
+    img.style.height = "100px";
+    img.style.borderRadius = "50%";
+    img.style.transition = "all 1s";
+    productsPreview.appendChild(img);
+    console.log(cartPosition, img);
+    setTimeout(function () {
+        img.style.top = (cartPosition.top + cartPosition.height / 2 - 5 - productsPreviewPosition.top) + "px";
+        img.style.left = (cartPosition.left + cartPosition.width / 2 - 5 - productsPreviewPosition.left) + "px";
+        img.style.width = "10px";
+        img.style.height = "10px";
+    }, 10);
+    setTimeout(function () {
+        img.remove();
+    }, 1000);
+    //quand l'image arrive au panier, le panier grossi
+    cartDiv.style.transition = "all 0.1s";
+    setTimeout(function () {
+        cartDiv.style.transform = "scale(1.2)";
+    },900);
+    setTimeout(function () {
+        cartDiv.style.transform = "scale(1)";
+    },1000);
 //get cart from cookie
     let cart = getCookie("panierid");
     if (!cart) {
@@ -221,34 +256,10 @@ function addInCart(productId, quantity, event) {
         );
     } else {
 //add product in cart
-        fetch(serverUrl+"/api/addPanier/" + cart + "/" + productId + "/" + quantity)
+        fetch(serverUrl+"/api/addPanier/" + cartDiv + "/" + productId + "/" + quantity)
             .then(response => response.json())
             .then(data => {
-                //crée une dive avec l'image du produit
-                let div = document.createElement("div")
-                div.innerHTML = `<img src="${data.image}" alt="${data.name}" class="panier--container--body--product--img">`
-                div.style= "width:50px;height:50px; position:absolute; border-radius:50%; overflow:hidden; transition:all 1s ease-in-out;"
-                //get mouse position
-                let x = event.clientX;
-                let y = event.clientY;
-                div.style.top = y + "px";
-                div.style.left = x + "px";
-                //optien la position de la div panier
-                let panier = document.getElementById("panier");
-                let panierX = panier.getBoundingClientRect().x;
-                let panierY = panier.getBoundingClientRect().y;
-                //ajoute la div a au productsPreview
-                document.getElementById("productsPreview").appendChild(div);
-                console.log(div)
-                //anime la div vers le panier
-                div.style.top = panierY + "px";
-                div.style.left = panierX + "px";
-                div.style.width = "0px";
-                div.style.height = "0px";
-                div.style.opacity = "0";
-                setTimeout(function () {
-                    div.remove();
-                },1000)
+                
 
             }
         );
