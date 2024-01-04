@@ -13,7 +13,7 @@ function submitForm() {
     };
 
     fetch('/api/addCategory', {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },

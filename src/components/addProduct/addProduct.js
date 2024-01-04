@@ -25,7 +25,7 @@ function submitForm() {
     };
 
     fetch('/api/addProduct', {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },
