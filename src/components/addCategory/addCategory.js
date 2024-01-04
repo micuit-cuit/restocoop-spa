@@ -11,13 +11,11 @@ function submitForm() {
         description: description,
         imageUrl: imageUrl,
     };
-
-    fetch('/api/addCategory', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify([requestData]),
+    //convert object to string url variable
+    const urlParams = new URLSearchParams(Object.entries(requestData));
+    //call api
+    fetch('/api/addCategory?' + urlParams, {
+        method: 'GET'
     })
     .then(response => response.json())
     .then(data => {

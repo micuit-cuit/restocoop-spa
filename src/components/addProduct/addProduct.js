@@ -23,13 +23,10 @@ function submitForm() {
         imageUrl: imageUrl,
         description: description
     };
-
-    fetch('/api/addProduct', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify([requestData]),
+    //convert object to string url variable
+    const urlParams = new URLSearchParams(Object.entries(requestData));
+    fetch('/api/addProduct?' + urlParams, {
+        method: 'GET'
     })
     .then(response => response.json())
     .then(data => {
