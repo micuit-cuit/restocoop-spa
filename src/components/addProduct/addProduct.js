@@ -6,7 +6,7 @@ function submitForm() {
     const quantity = document.getElementById('quantity').value;
     const poids = document.getElementById('poids').value;
     const prix = document.getElementById('prix').value;
-    const fournisseur = document.getElementById('fournisseur').value;
+    const fournisseurID = document.getElementById('fournisseurID').value;
     const imageUrl = document.getElementById('imageUrl').value;
     const description = document.getElementById('description').value;
 
@@ -19,12 +19,12 @@ function submitForm() {
         quantity: quantity,
         poids: poids,
         prix: prix,
-        fournisseur: fournisseur,
+        fournisseurID: fournisseurID,
         imageUrl: imageUrl,
         description: description
     };
     //convert object to string url variable
-    const urlParams = new URLSearchParams(Object.entries(requestData));
+    const urlParams = urlVarsEncode(requestData)
     fetch('/api/addProduct?' + urlParams, {
         method: 'GET'
     })
@@ -37,4 +37,11 @@ function submitForm() {
     .catch(error => {
         console.error('Error:', error);
     });
+}
+function urlVarsEncode (urlVars) {
+    let urlVarsEncoded = '';
+    for (const key in urlVars) {
+        urlVarsEncoded += `${key}=${encodeURIComponent(urlVars[key])}&`;
+    }
+    return urlVarsEncoded.slice(0, -1);
 }

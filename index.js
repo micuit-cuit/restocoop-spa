@@ -427,8 +427,8 @@ const Produit = client.define('Produit', {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
-    fournisseur: {
-        type: DataTypes.STRING,
+    fournisseurID: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     imageUrl: {

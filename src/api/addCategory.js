@@ -37,6 +37,7 @@ module.exports.execute = function ({ apiKeys, res, arg, models }) {
                                 }
                             })
                             .catch(error => {
+                                
                                 sendErrorResponse(res, error.message, 500);
                             });
                         }
