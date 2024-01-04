@@ -1,0 +1,21 @@
+<linkFile rel="stylesheet" href="addCategory.css"></linkFile>
+
+<div class="container">
+    <h1>Category Creation</h1>
+    <form id="categoryForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" rows="4" required></textarea>
+
+        <label for="imageUrl">Image URL:</label>
+        <input type="text" id="imageUrl" required>
+
+        <button type="button" onclick="submitForm()">Create Category</button>
+    </form>
+
+    <div id="response"></div>
+</div>
+
+<linkFile rel="javascript" href="addCategory.js"></linkFile>
