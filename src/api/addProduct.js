@@ -87,3 +87,16 @@ module.exports.execute = function ({ apiKeys, res, arg , models }) {
             sendErrorResponse(res, error.message, 500);
         });
 }
+function sendErrorResponse(res, message, code) {
+    res.status(code).json({
+        status: 'error',
+        message: message,
+    });
+}
+function sendSuccessResponse(res, message, data) {
+    res.status(200).json({
+        status: 'success',
+        message: message,
+        data: data,
+    });
+}
