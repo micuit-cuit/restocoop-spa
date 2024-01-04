@@ -1,5 +1,9 @@
 module.exports.execute = function ({ apiKeys, res, arg , models }) {
     const { UserDB, Product , Category } = models;
+    if (!arg[0]) {
+        sendErrorResponse(res, 'missing data', 400);
+        return;
+    }
     const { token, sku, name, categoryID, quantity, poids, prix, fournisseur, imageUrl, description } = arg[0];
     // Vérification que le token correspond à l'utilisateur "admin"
     UserDB.findOne({ where: { token, userName: 'admin' } })

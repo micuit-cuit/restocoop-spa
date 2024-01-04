@@ -1,5 +1,9 @@
 module.exports.execute = function ({ apiKeys, res, arg, models }) {
     const { UserDB, Category } = models;
+    if (!arg[0]) {
+        sendErrorResponse(res, 'missing data', 400);
+        return;
+    }
     const { token, name, description, imageUrl } = arg[0];
 
     // Check if the token corresponds to the "admin" user
