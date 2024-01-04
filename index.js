@@ -263,6 +263,19 @@ if (config.devtool.httpProxi) {
         );
     });
 }
+app.get('/api', (req, res) => {
+    //recupere tout les api
+    let api = fs.readdirSync(config.path.api);
+    api = api.filter(api => api.includes('.js'));
+    //renvoie la liste des api disponible en html
+    let html = '<ul>';
+    api.forEach(api => {
+        html += '<li><a href="/api/' + api.split('.')[0] + '">' + api.split('.')[0] + '</a></li>';
+    }
+    );
+    html += '</ul>';
+    res.send(html);
+});
 app.get('/api/:api*', async (req, res) => {
     //color blue pour l'url et vert pour le nom de la page
     //récupere l'argument de l'api (apret le /api/$api/)
