@@ -59,112 +59,113 @@ function getProducts(categoryId = null) {
                         `;
                 //si on clique sur le produit sa le rajoute au panier
                 console.log(0);
-                productsContainer.onclick = function () {
-                    console.log(1);
-                    //crée un popup pour: afficher le produit, les details, la quantité, le prix, le bouton ajouter au panier
-                    let product = products[i];
-                    let popup = document.createElement("div");
-                    popup.classList.add("popup");
-                    popup.innerHTML = `
-                        <div class="popup--container">
-                            <div class="popup--container--header">
-                                <h2>${product.name}</h2>
-                            </div>
-                            <div class="popup--container--body">
-                                <img src="${product.image.url}" alt="${product.name}" class="popup--container--body--img">
-                                <div class="popup--container--body--details">
-                                    <p>${product.description}</p>
-                                    <p>${products[i].price.formatted}€/${products[i].sku}</p>
-                                    <div class="popup--container--body--details--quantity">
-                                        <div class="products--container--quantity"> <input type="number" value="1" min="1" max="${products[i].inventory.available / 10}" id="quantity-${products[i].id}"> <label for="quantity-${products[i].id}">✗ 10 kg</label></div>
-                                        <button class="add-to-cart" id="add-to-cart-${i}" img="${products[i].image.url}"><i class="fa-solid fa-cart-plus"></i></button>
+                if (window.products == undefined) {
+                    productsContainer.onclick = function () {
+                        console.log(1);
+                        //crée un popup pour: afficher le produit, les details, la quantité, le prix, le bouton ajouter au panier
+                        let product = products[i];
+                        let popup = document.createElement("div");
+                        popup.classList.add("popup");
+                        popup.innerHTML = `
+                            <div class="popup--container">
+                                <div class="popup--container--header">
+                                    <h2>${product.name}</h2>
+                                </div>
+                                <div class="popup--container--body">
+                                    <img src="${product.image.url}" alt="${product.name}" class="popup--container--body--img">
+                                    <div class="popup--container--body--details">
+                                        <p>${product.description}</p>
+                                        <p>${products[i].price.formatted}€/${products[i].sku}</p>
+                                        <div class="popup--container--body--details--quantity">
+                                            <div class="products--container--quantity"> <input type="number" value="1" min="1" max="${products[i].inventory.available / 10}" id="quantity-${products[i].id}"> <label for="quantity-${products[i].id}">✗ 10 kg</label></div>
+                                            <button class="add-to-cart" id="add-to-cart-${i}"><i class="fa-solid fa-cart-plus"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <style>
-                            .popup{
-                                position:absolute;
-                                top:0;
-                                left:0;
+                                <style>
+                                .popup{
+                                    position:absolute;
+                                    top:0;
+                                    left:0;
+                                    width:100%;
+                                    height:100%;
+                                    background-color:#00000050;
+                                }
+                                .popup--container{
+                                    position:absolute;
+                                    top:50%;
+                                    left:50%;
+                                    transform:translate(-50%,-50%);
+                                    width:80%;
+                                    height:80%;
+                                    background-color:white;
+                                    color:black;
+                                    border-radius:10px;
+                                    overflow:hidden;
+                                }
+                                /* Popup  container */
+                                #page-Import div .popup--container{
+                                flex-direction:column;
+                                }
+
+                                /* Popup  container  header */
+                                .popup .popup--container--header{
+                                display:flex;
+                                justify-content:space-between;
                                 width:100%;
-                                height:100%;
-                                background-color:#00000050;
-                            }
-                            .popup--container{
-                                position:absolute;
-                                top:50%;
-                                left:50%;
-                                transform:translate(-50%,-50%);
-                                width:80%;
-                                height:80%;
-                                background-color:white;
-                                color:black;
-                                border-radius:10px;
-                                overflow:hidden;
-                            }
-                            /* Popup  container */
-                            #page-Import div .popup--container{
-                            flex-direction:column;
-                            }
+                                }
 
-                            /* Popup  container  header */
-                            .popup .popup--container--header{
-                            display:flex;
-                            justify-content:space-between;
-                            width:100%;
-                            }
+                                /* Popup  container */
+                                #productsPreview .popup .popup--container{
+                                display:flex;
+                                justify-content:normal;
+                                align-items:center;
+                                width:40%;
+                                height:40%;
+                                }
 
-                            /* Popup  container */
-                            #productsPreview .popup .popup--container{
-                            display:flex;
-                            justify-content:normal;
-                            align-items:center;
-                            width:40%;
-                            height:40%;
-                            }
+                                /* Popup  container  body */
+                                .popup .popup--container--body{
+                                width:100%;
+                                display:flex;
+                                flex-direction:column;
+                                align-items:center;
+                                }
 
-                            /* Popup  container  body */
-                            .popup .popup--container--body{
-                            width:100%;
-                            display:flex;
-                            flex-direction:column;
-                            align-items:center;
-                            }
+                                /* Popup  container  body */
+                                #page-Import div div #productsPreview .popup .popup--container .popup--container--body{
+                                height:100% !important;
+                                }
 
-                            /* Popup  container  body */
-                            #page-Import div div #productsPreview .popup .popup--container .popup--container--body{
-                            height:100% !important;
-                            }
+                                /* Image */
+                                .popup .popup--container--body--img{
+                                width:25%;
+                                border-top-left-radius:30px;
+                                border-top-right-radius:30px;
+                                border-bottom-left-radius:30px;
+                                border-bottom-right-radius:30px;
+                                }
 
-                            /* Image */
-                            .popup .popup--container--body--img{
-                            width:25%;
-                            border-top-left-radius:30px;
-                            border-top-right-radius:30px;
-                            border-bottom-left-radius:30px;
-                            border-bottom-right-radius:30px;
-                            }
+                                /* Image */
+                                #page-Import div div #productsPreview .popup .popup--container .popup--container--body .popup--container--body--img{
+                                height:auto !important;
+                                }
 
-                            /* Image */
-                            #page-Import div div #productsPreview .popup .popup--container .popup--container--body .popup--container--body--img{
-                            height:auto !important;
-                            }
-
-                            /* Division */
-                            .popup .popup--container--body--details{
-                            margin-top:30px;
-                            }
+                                /* Division */
+                                .popup .popup--container--body--details{
+                                margin-top:30px;
+                                }
 
 
-                        </div>
-                        `;
+                            </div>
+                            `;
                         console.log(popup);
                         document.getElementById("productsPreview").appendChild(popup);
                         let addToCartButton = document.getElementById("add-to-cart-"+i);
                         addToCartButton.onclick = function (event) {
                             console.log("add to cart");
                             let quantity = popup.querySelector(".products--container--quantity input").value * 10;
-                            addInCart(products[i].id, quantity, event)
+                            addInCart(products[i], quantity, event)
                             popup.remove();
                         }
                         popup.onclick = function (e) {
@@ -175,6 +176,7 @@ function getProducts(categoryId = null) {
                             }
                         }
                         console.log(2);
+                    }
                 }
                 productsContainer.classList.add("products--container");
                 productsDiv.appendChild(productsContainer);
@@ -205,7 +207,39 @@ function getProducts(categoryId = null) {
     }
 
 }
-function addInCart(productId, quantity, event) {
+function addInCart(product, quantity, event) {
+    const productId = product.id;
+    GSM.send("panier", { productId, quantity });
+    //ajoute le produit au local storage 
+    //si le produit existe deja alors on ajoute la quantité
+    //sinon on crée le produit
+    let cartProducts = JSON.parse(localStorage.getItem("cartProducts"));
+    if (!cartProducts) {
+        cartProducts = []
+    }
+    let productExist = false;
+    console.log(cartProducts, product, productId);
+    let productPanier = {
+        id: productId,
+        name: product.name,
+        quantity: quantity,
+        price: product.price.formatted,
+        image: product.image.url,
+        sku: product.sku
+    }
+    for (let i = 0; i < cartProducts.length; i++) {
+        if (cartProducts[i].id == productId) {
+            cartProducts[i].quantity += quantity;
+            productExist = true;
+            break;
+        }
+    }
+    if (!productExist) {
+        cartProducts.push(productPanier);
+    }
+    localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
+    //decremente la quantité de produit disponible
+    product.inventory.available -= quantity/10;
     //crée une img qui va de la position de l'element cliquer a la position du panier
     //et le panier mange l'image
     let cartDiv = document.getElementById("panier");
@@ -214,19 +248,20 @@ function addInCart(productId, quantity, event) {
     let cartPosition = cartDiv.getBoundingClientRect();
     let img = document.createElement("img");
     console.log(event.target);
-    img.src = event.target.getAttribute("img") || "https://s2.qwant.com/thumbr/474x355/d/b/15ac021101131d183d2e6f9a4cbcb9283c673e0af5e7df2913fe2dbad8c40b/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIP.rExqAS6nxccIjikCQQdfvQHaFj%26pid%3DApi&q=0&b=1&p=0&a=0"
+    img.src = product.image.url;
     img.style.position = "absolute";
     img.style.top = (event.clientY - 50 - productsPreviewPosition.top) + "px"; 
     img.style.left = (event.clientX - 50 - productsPreviewPosition.left) + "px";
     img.style.width = "100px";
     img.style.height = "100px";
-    img.style.borderRadius = "50%";
+    img.style.borderRadius = "25%";
     img.style.transition = "all 1s";
     productsPreview.appendChild(img);
     console.log(cartPosition, img);
     setTimeout(function () {
         img.style.top = (cartPosition.top + cartPosition.height / 2 - 5 - productsPreviewPosition.top) + "px";
         img.style.left = (cartPosition.left + cartPosition.width / 2 - 5 - productsPreviewPosition.left) + "px";
+        img.style.borderRadius = "50%";
         img.style.width = "10px";
         img.style.height = "10px";
     }, 10);
@@ -241,29 +276,6 @@ function addInCart(productId, quantity, event) {
     setTimeout(function () {
         cartDiv.style.transform = "scale(1)";
     },1000);
-//get cart from cookie
-    let cart = getCookie("panierid");
-    if (!cart) {
-//create cart if not exist
-        fetch(serverUrl+"/api/createPanier")
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                let cart = data.id;
-                setCookie("panierid", cart);
-                addInCart(productId, quantity, event);
-            }
-        );
-    } else {
-//add product in cart
-        fetch(serverUrl+"/api/addPanier/" + cartDiv + "/" + productId + "/" + quantity)
-            .then(response => response.json())
-            .then(data => {
-                
-
-            }
-        );
-    }
 }
 
 window.onload = function () {
@@ -286,7 +298,7 @@ window.onload = function () {
         iframe.style.height = "0%";
         iframe.style.border = "none";
         iframe.style.zIndex = "100";
-        iframe.style.transition = "all 1s";
+        iframe.style.transition = "1s height";
         iframe.id = "panierIframe";
         document.body.appendChild(iframe);
         console.log(iframe);
@@ -339,7 +351,45 @@ window.onload = function () {
             return;
         }else{
             //affiche une iframe avec le panier dedans
+            //recupere la position du panier(le bouton)
+            // Coordonnées de la première div
+            let panierPosition = panier.getBoundingClientRect();
+            let x1 = panierPosition.left;
+            let y1 = panierPosition.top;
+            let sx1 = panierPosition.width;
+            let sy1 = panierPosition.height;
+            let iframePosition = panierIframe.getBoundingClientRect();
+            // Dimensions de la deuxième div
+            let s2x = iframePosition.width;
+            let s2y = iframePosition.height;
+
+            // Calcul des coordonnées pour centrer la deuxième div par rapport à la première
+            let x2 = x1 + (sx1 - s2x) / 2;
+            let y2 = y1 + (sy1 - s2y);
+
+            // Vérifier si la deuxième div dépasse le bord droit de la fenêtre
+            if (x2 + s2x > window.innerWidth) {
+                x2 = window.innerWidth - s2x;
+            }
+
+            // Vérifier si la deuxième div dépasse le bord inférieur de la fenêtre
+            if (y2 + s2y > window.innerHeight) {
+                y2 = window.innerHeight - s2y;
+            }
+
+            // Vérifier si la deuxième div dépasse le bord gauche de la fenêtre
+            if (x2 < 0) {
+                x2 = 0;
+            }
+
+            // Vérifier si la deuxième div dépasse le bord supérieur de la fenêtre
+            if (y2 < 0) {
+                y2 = 0;
+            }
+
             panierIframe.style.display = "block";
+            panierIframe.style.top = y2 + "px";
+            panierIframe.style.left = x2 + "px";
             panierToggle = true;
             setTimeout(function () {
                 panierIframe.style.height = "50%";
@@ -363,4 +413,14 @@ window.onload = function () {
         getCategories();
         getProducts();
     }
+}
+function divPosition(x,y){
+    //crée un div a la position x,y
+    let div = document.createElement("div");
+    div.style.position = "absolute";
+    div.style.top = y + "px";
+    div.style.left = x + "px";
+    div.id = "x"+x+"y"+y;
+    document.body.appendChild(div);
+    return div;
 }

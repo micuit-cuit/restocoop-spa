@@ -5,12 +5,13 @@ const express = require('express');
 const http = require('http');
 const fs = require('fs');
 const {start,Log} = require('./log.js');
-const { Client } = require('pg');
+const { Sequelize, DataTypes } = require('sequelize');
 const browserDectect = require('browser-detect')
 const HTMLParser = require('node-html-parser');
 const config = require('./config.json5');
 const root = require('./src/router.js').routes;
 const log = new Log();
+
 function parseRoute(route) {
     let routes = [];
     for (let key in route) {
@@ -51,6 +52,10 @@ if (!fs.existsSync(config.path.component)) {
 }
 const app = express();
 const server = http.createServer(app);
+app.get('/PKILL', (req, res) => {
+    res.send('server killed');
+    process.exit(0);
+});
 app.get('*', (req, res, next) => {
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     if (ip.substr(0, 7) == "::ffff:") {
@@ -285,7 +290,7 @@ app.get('/api/:api*', async (req, res) => {
     if (fs.existsSync(config.path.api + req.params.api + ".js")) {
         //si oui, appel l'api
         const api = require(config.path.api + req.params.api + ".js");
-        api.execute({apiKeys: process.env.COMMERCE_JS_API, config: config, res: res, arg: arg, req: req, userDb: client});
+        api.execute({apiKeys: process.env.COMMERCE_JS_API, config: config, res: res, arg: arg, req: req, client, models: {Sequelize,UserDB}});
     } else {
         res.send("api not found");
     }
@@ -346,34 +351,46 @@ if (config.path.startJs) {
         require(config.path.startJs).execute({ config: config, server: server });
     }
 }
-const client = new Client({
-    host: process.env.PG_HOST,
-    port: process.env.PG_PORT,
-    user: process.env.PG_USER,
-    password: process.env.PG_PASSWORD,
-    database: process.env.PG_DATABASE
+
+const client = new Sequelize('restocoopDEV', 'user', 'password', {
+    host: 'localhost',
+    dialect: 'sqlite',
+    logging: false,
+    // SQLite only
+    storage: 'database.sqlite',
 });
-client.connect()
+//quand la base de donnée est connecté
+const UserDB = client.define('userdb', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    userName: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+        unique: true,
+    },
+    email: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+        unique: true,
+    },
+    password: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+    },
+    token: {
+        type: DataTypes.STRING(255),
+    },
+  });
+  
+client.sync()
     .then(() => {
-        log.l('connected to database');
-        //ajoute les table dans la base de donnée pour les userdb
-        client.query(`CREATE TABLE IF NOT EXISTS userdb (
-            id SERIAL PRIMARY KEY NOT NULL,
-            userName VARCHAR(255) NOT NULL UNIQUE,
-            email VARCHAR(255) NOT NULL UNIQUE,
-            password VARCHAR(255) NOT NULL ,
-            token VARCHAR(255)
-        );`)
-            .then(() => {
-                log.l('table userdb created or already exist');
-                start({ app, port: config.port, f: () => { log.l('server started'); } });
-            })
-            .catch(err => {
-                log.error('error creating table userdb');
-                log.error(err);
-            });
+        log.l('Connecté à la base de données');
+        start({ app, port: config.port, f: () => { log.l('Serveur démarré'); } });
     })
-    .catch(err => {
-        log.error('error connecting to database');
-        log.error(err);
+    .catch((err) => {
+        console.error('Erreur lors de la connexion à la base de données :', err);
     });
+  

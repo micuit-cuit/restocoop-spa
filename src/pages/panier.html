@@ -1,3 +1,5 @@
+<linkFile rel="javascript" href="panier.js"></linkFile>
+<linkFile rel="stylesheet" href="panier.css"></linkFile>
 <div id="products">
     
 </div>
@@ -17,13 +19,7 @@
  margin-right:10px;
  margin-left:10px;
  padding-top:10px;
- padding-bottom:10px;
-}
-
-/* Products */
-#products{
- display:flex;
- flex-direction:column;
+ padding:10px;
 }
 
 /* Product  image */
@@ -79,3 +75,30 @@
  top:10px;
 }
 </style>
+
+<div id="loading">
+    <div class="loading-text"></div>
+    <style>
+        #loading {
+            background-color: #191919b4;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+    
+        .loading-text {
+            font-size: 2em;
+        }
+    </style>
+
+</div>

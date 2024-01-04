@@ -24,8 +24,8 @@
         }
     },
     hiddenCategories:["Nos Produits Phares"],//categories a ne pas afficher dans la page produit [array default:["Nos Produits Phares"]]
-    captchaCaractere:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,;:!*-+@/.?",//caractere possible pour le captcha [string default:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,;:!*-+@/.?"]
-    captchaLongeur:[7,10],//longeur du captcha [array default:[5,7]]
+    captchaCaractere:"ABCDEFGHIJKLMNOPRSTUVWXYZ0123456789*-+@",//caractere possible pour le captcha [string default:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789,;:!*-+@/.?"]
+    captchaLongeur:[6,8],//longeur du captcha [array default:[5,7]]
     tempFile:[//fichier temporaire a suprimer au demarage du serveur [array default:["./temp"]]
         "./build",
         "./src/media/img/captcha",//chemin du dossier captcha, pour suprimer les captcha non utiliser et eviter de surcharger le serveur (il sont suprimer au bout de 10min) [string default:"./src/media/img/captcha"]

@@ -27,6 +27,22 @@ async function testToken(token){
     console.log(data);
     return data.status;
 }
+//GSM-TIF (Global System Messaging - Tabs and IFrames)
+const GSM = {
+    send: function(message, donnees) {
+        localStorage.setItem(message, JSON.stringify(donnees));
+    },
+    on: function(message, callback) {
+        window.addEventListener('storage', (event) => {
+            if (event.key === message) {
+                const donnees = JSON.parse(event.newValue);
+                callback(donnees);
+            }
+        });
+    }
+};
+
+
 /*
            ^
           / \
