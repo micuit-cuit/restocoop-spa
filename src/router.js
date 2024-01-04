@@ -12,6 +12,7 @@ module.exports.routes = {
     'GET /produitAll': 'produitAll.html',
     'GET /produitAll/*': 'produitAll.html',
     'GET /addProduct': 'addProduct.html',
+    'GET /addCategory': 'addCategory.html',
 
     'GET /historique': 'test.html',
     'GET /menu': 'test.html',
