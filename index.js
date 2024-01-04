@@ -290,7 +290,7 @@ app.get('/api/:api*', async (req, res) => {
     if (fs.existsSync(config.path.api + req.params.api + ".js")) {
         //si oui, appel l'api
         const api = require(config.path.api + req.params.api + ".js");
-        api.execute({apiKeys: process.env.COMMERCE_JS_API, config: config, res: res, arg: arg, req: req, client, models: {Sequelize,UserDB}});
+        api.execute({apiKeys: process.env.COMMERCE_JS_API, config: config, res: res, arg: arg, req: req, client, models: {Sequelize,UserDB,Produit}});
     } else {
         res.send("api not found");
     }
@@ -383,8 +383,56 @@ const UserDB = client.define('userdb', {
     token: {
         type: DataTypes.STRING(255),
     },
+});
+const Produit = client.define('Produit', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    sku: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    nom: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    categorie: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    quantiteEnStock: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    poidsUnitaire: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+    },
+    prixUnitaire: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+    },
+    fournisseur: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    dateAjoutStock: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    dateDerniereMiseAJour: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    imageUrl: {
+        type: DataTypes.STRING,
+    },
+    description: {
+        type: DataTypes.TEXT,
+    },
   });
-  
 client.sync()
     .then(() => {
         log.l('Connecté à la base de données');
