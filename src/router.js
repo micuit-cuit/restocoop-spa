@@ -11,6 +11,7 @@ module.exports.routes = {
     'GET /userPanel': 'userPanel.html',
     'GET /produitAll': 'produitAll.html',
     'GET /produitAll/*': 'produitAll.html',
+    'GET /addProduct': 'addProduct.html',
 
     'GET /historique': 'test.html',
     'GET /menu': 'test.html',

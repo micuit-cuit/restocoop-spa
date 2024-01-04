@@ -135,3 +135,4 @@ captcha/
 temp/activeCaptcha.json
 temp/
 build/
+database.sqlite
