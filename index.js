@@ -456,6 +456,101 @@ const Category = client.define('Category', {
         required: true,
     }
 });
+const Fournisseur = client.define('Fournisseur', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    label: {
+        type: DataTypes.STRING,
+        required: true,
+    },
+    categoryIDs: {
+        type: DataTypes.STRING,
+        required: true,
+    },
+    name: {
+        type: DataTypes.STRING,
+        required: true,
+    },
+    firstname: {
+        type: DataTypes.STRING,
+        required: true,
+    },
+    adress: {
+        type: DataTypes.STRING,
+        required: true,
+    },
+    phone: {
+        type: DataTypes.STRING,
+        required: true,
+    },
+    email: {
+        type: DataTypes.STRING,
+        required: true,
+    },
+    status: {
+        type: DataTypes.STRING,
+        required: true,
+    },
+    sosialMedia: {
+        type: DataTypes.TEXT,
+    },
+    description: {
+        type: DataTypes.TEXT,
+    },
+    reseauPro: {
+        type: DataTypes.STRING,
+    },
+    imageUrls: {
+        type: DataTypes.STRING,
+    },
+    videoUrls: {
+        type: DataTypes.STRING,
+    },
+    adhesionRestocoopDate: {
+        type: DataTypes.DATE,
+    },
+    idAdhesionRestocoop: {
+        type: DataTypes.INTEGER,
+    },
+    regimeTva: {
+        type: DataTypes.DOUBLE,
+        required: true,
+    },
+    modalitesLivraison: {
+        type: DataTypes.STRING,
+        required: true,
+    },
+    minCommande: {
+        type: DataTypes.INTEGER,
+    },
+    minCommandeType: {
+        type: DataTypes.STRING,
+    },
+    certificats: {
+        type: DataTypes.STRING,
+    },
+    certificatsDate: {
+        type: DataTypes.DATE,
+    },
+    fournisseurAmont: {
+        type: DataTypes.TEXT,
+    },
+    fournisseurAval: {
+        type: DataTypes.TEXT,
+    },
+    cooperation: {
+        type: DataTypes.STRING,
+    },
+    cooperationDate: {
+        type: DataTypes.DATE,
+    }
+});
+
+
+
 client.sync()
     .then(() => {
         log.l('Connecté à la base de données');
