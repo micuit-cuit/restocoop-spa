@@ -437,6 +437,14 @@ const Produit = client.define('Produit', {
     description: {
         type: DataTypes.TEXT,
     },
+    tva: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+    },
+    status: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    }
 });
 const Category = client.define('Category', {
     id: {
