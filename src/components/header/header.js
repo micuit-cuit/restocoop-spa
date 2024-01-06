@@ -1,15 +1,17 @@
 //active le lien du menu correspondant à la page
 function loadHeader() {
     //si on clique sur le menu openMenu, on affiche le menu
+    const buttonPos = document.querySelector("#userButton").getBoundingClientRect();
     const openMenu = document.querySelector("#openMenu");
     const menu = document.querySelector(".header--menu");
+    const UserData = document.querySelector("#UserData");
+    UserData.style.left = buttonPos.left + "px";
+    UserData.style.position = "absolute";
     const closeMenu = document.querySelector("#closeMenu");
     openMenu.addEventListener("click", () => {
-        console.log("click");
         menu.classList.toggle("open");
     })
     closeMenu.addEventListener("click", () => {
-        console.log("click");
         menu.classList.toggle("open");
     })
     //si on clique sur un lien du menu ou a l'exterieur du menu, on ferme le menu
@@ -30,14 +32,11 @@ function loadHeader() {
 setTimeout( () => {
     loadHeader();
     const userButton = document.querySelector("#userButton");
-    console.log(userButton);
     userButton.addEventListener("click", (e) => {
         const userMenu = document.querySelector("#UserData");
-        console.log(userMenu.style.display);
         function closeMenu(e){
-            console.log(e.target);
             //iniore les clicks si on est apret la div #userButton dans le DOM
-            if(e.target.closest("#userButton")){
+            if(e.target.closest("#UserData")){
                 return;
             }
             // if(e.target != userMenu && e.target != userButton){
@@ -47,7 +46,6 @@ setTimeout( () => {
         }
         if(userMenu.style.display == "none"){
             userMenu.style.display = "flex";
-            console.log("affichage du menu utilisateur");
             setTimeout( () => {
                 document.addEventListener("click", closeMenu);
             }, 100 );

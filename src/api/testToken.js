@@ -15,7 +15,7 @@ module.exports.execute = function ({ res, arg, config , client , models }) {
         })
         .catch((err) => {
             //Si le token est invalide on renvoie un status 401
-            res.writeHead(401, {'Content-Type': 'text/json'});
+            res.writeHead(200, {'Content-Type': 'text/json'});
             res.write(JSON.stringify({message: 'token invalide', status: false}));
             res.end();
         })}

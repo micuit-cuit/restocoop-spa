@@ -278,7 +278,8 @@ function addInCart(product, quantity, event) {
     },1000);
 }
 
-window.onload = function () {
+setTimeout(function () {
+    console.log("window.onload");
     //si window.products est un objet html alors on le remplace par undefined
     if (window.products instanceof HTMLElement) {
         window.products = undefined;
@@ -413,7 +414,7 @@ window.onload = function () {
         getCategories();
         getProducts();
     }
-}
+} , 100);
 function divPosition(x,y){
     //crée un div a la position x,y
     let div = document.createElement("div");
@@ -424,3 +425,5 @@ function divPosition(x,y){
     document.body.appendChild(div);
     return div;
 }
+
+    
